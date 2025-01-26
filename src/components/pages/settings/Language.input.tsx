@@ -3,11 +3,11 @@
 import { Section, Select } from '@telegram-apps/telegram-ui'
 import { Earth } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { localesMap } from '@/core/i18n/config'
-import type { Locale } from '@/core/i18n/types'
 import { useLocale } from '@/store/lang/use-locale'
 import { IconCell } from '../../shared/cells/icon-cell/IconCell'
 import { Link } from '../../shared/link/Link'
+import { localesMap } from '@/i18n/config'
+import type { Locale } from '@/i18n/types'
 
 export function LanguageInput() {
     const t = useTranslations('Settings.Language')

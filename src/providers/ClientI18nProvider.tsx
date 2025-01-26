@@ -3,10 +3,10 @@
 import { NextIntlClientProvider } from 'next-intl'
 import { type PropsWithChildren, useEffect, useState } from 'react'
 import { Loader } from '@/components/ui/Loader'
-import { defaultTimeZone } from '@/core/i18n/config'
-import { getLocales } from '@/core/i18n/getLocales'
-import type { Translation } from '@/core/i18n/types'
 import { useLocale } from '@/store/lang/use-locale'
+import { defaultTimeZone } from '@/i18n/config'
+import { getLocales } from '@/i18n/getLocales'
+import type { Translation } from '@/i18n/types'
 
 export function ClientI18nProvider({ children }: PropsWithChildren) {
     const { locale } = useLocale()

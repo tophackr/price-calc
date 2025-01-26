@@ -1,6 +1,6 @@
 import { getRequestConfig } from 'next-intl/server'
-import { getLocales } from '@/core/i18n/getLocales'
 import { getLocale } from '@/store/lang/lang'
+import { getLocales } from '@/i18n/getLocales'
 
 const i18nRequestConfig = getRequestConfig(async () => {
     const locale = await getLocale()

@@ -1,8 +1,8 @@
 import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 import type { WritableDraft } from 'immer'
-import { defaultLocale } from '@/core/i18n/config'
-import type { Locale } from '@/core/i18n/types'
 import type { RootState } from '../store'
+import { defaultLocale } from '@/i18n/config'
+import type { Locale } from '@/i18n/types'
 
 interface LangState {
     value: Locale

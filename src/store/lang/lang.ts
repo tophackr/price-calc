@@ -1,6 +1,6 @@
 import { cloudStorage } from '@telegram-apps/sdk-react'
-import { defaultLocale } from '@/core/i18n/config'
-import type { Locale } from '@/core/i18n/types'
+import { defaultLocale } from '@/i18n/config'
+import type { Locale } from '@/i18n/types'
 
 const LANG_NAME = 'TG_LOCALE'
 

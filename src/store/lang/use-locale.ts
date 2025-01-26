@@ -1,8 +1,8 @@
-import type { Locale } from '@/core/i18n/types'
 import { useActions } from '../hooks/use-actions'
 import { useAppSelector } from '../hooks/use-app-selector'
 import { setLocale as setLocaleCloud } from './lang'
 import { selectLocale } from './lang.slice'
+import type { Locale } from '@/i18n/types'
 
 export function useLocale() {
     const locale = useAppSelector(selectLocale)
