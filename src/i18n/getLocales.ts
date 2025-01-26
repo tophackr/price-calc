@@ -5,23 +5,11 @@ export async function getLocales(
     locale: Locale = defaultLocale
 ): Promise<TranslationConfig> {
     const fetchMessages = await import(
-        `@public/locales/${locale === defaultLocale || !locales.includes(locale) ? defaultLocale : locale}.json`
+        `../../public/locales/${locale === defaultLocale || !locales.includes(locale) ? defaultLocale : locale}.json`
     )
 
     return {
         locale,
-        messages: fetchMessages.default,
-        locales: locales.slice(),
-        defaultLocale,
-        pages: {
-            '*': [
-                'Home',
-                'PopupUnauthorizedError',
-                'Products',
-                'Search',
-                'Settings'
-            ],
-            '/_not-found': ['NotFound']
-        }
+        messages: fetchMessages.default
     }
 }

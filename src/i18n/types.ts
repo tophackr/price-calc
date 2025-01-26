@@ -17,13 +17,7 @@ export interface TranslationClient {
     t: ReturnType<typeof useTranslations>
 }
 
-interface TranslationRouting {
-    locales: Locale[]
-    defaultLocale: Locale
-    pages: Record<string, Array<keyof Translation>>
-}
-
-export interface TranslationConfig extends TranslationRouting {
+export interface TranslationConfig {
     locale: Locale
     messages: Translation
 }
