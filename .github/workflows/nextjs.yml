@@ -35,7 +35,7 @@ jobs:
               uses: actions/setup-node@v4
               with:
                   node-version: '20'
-                  cache: 'bun' # Указываем, что будем использовать bun
+                  cache: ${{ steps.detect-package-manager.outputs.manager }}
             - name: Install bun
               run: |
                   curl -fsSL https://bun.sh/install | bash
@@ -57,15 +57,15 @@ jobs:
                   restore-keys: |
                       ${{ runner.os }}-nextjs-${{ hashFiles('**/bun.lockb', '**/package-lock.json', '**/yarn.lock') }}-
             - name: Install dependencies
-              run: bun install # Используем bun для установки зависимостей
+              run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
             - name: Build with Next.js
-              run: bun run build # Используем bun для сборки проекта
+              run: ${{ steps.detect-package-manager.outputs.runner }} build
             - name: Upload artifact
               uses: actions/upload-pages-artifact@v3
               with:
                   path: ./out
 
-        # Deployment job
+    # Deployment job
     deploy:
         environment:
             name: github-pages
