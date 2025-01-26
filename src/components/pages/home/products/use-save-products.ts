@@ -48,6 +48,7 @@ export function useSaveProducts({
                 mainButton.setParams({ isVisible: false })
             }
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [autoSaveItems, item.cost, item.quantity])
 
     useMainButton({

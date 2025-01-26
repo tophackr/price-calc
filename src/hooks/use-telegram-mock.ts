@@ -22,7 +22,7 @@ export function useTelegramMock(): void {
         let lp: LaunchParams | undefined
         try {
             lp = retrieveLaunchParams()
-        } catch (e) {
+        } catch {
             const initDataRaw = new URLSearchParams([
                 ['query_id', 'AAFja2VNAgAAAGNrZU1TlbkB'],
                 [

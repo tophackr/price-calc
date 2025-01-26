@@ -14,11 +14,12 @@ export function useDebounceForm<T extends FieldValues>({
     onSubmit,
     debounceTime = 1000
 }: UseDebounceFormProps<T>) {
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     const debouncedSubmit = useCallback(
         debounce((formData: T) => {
             onSubmit(formData)
         }, debounceTime),
-        [debounceTime]
+        [onSubmit, debounceTime]
     )
 
     return useWatchForm({
