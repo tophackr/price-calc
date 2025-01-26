@@ -20,4 +20,5 @@ export interface TranslationClient {
 export interface TranslationFetchConfig {
     locale: Locale
     messages: Translation
+    pages: Record<string, Array<keyof Translation>>
 }

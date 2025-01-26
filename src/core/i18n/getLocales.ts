@@ -10,6 +10,16 @@ export async function getLocales(
 
     return {
         locale,
-        messages: fetchMessages.default
+        messages: fetchMessages.default,
+        pages: {
+            '*': [
+                'Home',
+                'PopupUnauthorizedError',
+                'Products',
+                'Search',
+                'Settings'
+            ],
+            '/_not-found': ['NotFound']
+        }
     }
 }
