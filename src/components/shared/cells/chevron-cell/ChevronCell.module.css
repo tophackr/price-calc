@@ -1,0 +1,8 @@
+.chevron {
+    margin-left: 0.25rem;
+    color: var(--tgui--secondary_hint_color);
+}
+
+.subtitle {
+    color: var(--tgui--subtitle_text_color);
+}

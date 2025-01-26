@@ -1,0 +1,17 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    background: var(--tg-theme-secondary-bg-color, #181818);
+}
+
+input[type='time']::-webkit-calendar-picker-indicator,
+input[type='date']::-webkit-calendar-picker-indicator {
+    display: none;
+}
+
+.tgui-56b2e897ed7ccb22 > .tgui-8ca550c2fc85eff5 {
+    padding: 0;
+    background: transparent;
+}

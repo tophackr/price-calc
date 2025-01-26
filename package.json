@@ -1,0 +1,53 @@
+{
+    "name": "price-calc",
+    "version": "0.0.1",
+    "private": true,
+    "homepage": "https://price-calc.tophackr.com",
+    "scripts": {
+        "dev": "next dev --turbopack",
+        "dev:https": "next dev --turbopack --experimental-https",
+        "deploy": "gh-pages -d build",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint"
+    },
+    "dependencies": {
+        "@reduxjs/toolkit": "^2.5.0",
+        "@telegram-apps/sdk-react": "^2.0.25",
+        "@telegram-apps/telegram-ui": "^2.1.8",
+        "clsx": "^2.1.1",
+        "gh-pages": "^6.3.0",
+        "lodash.debounce": "^4.0.8",
+        "lodash.isequal": "^4.5.0",
+        "lodash.omitby": "^4.6.0",
+        "lottie-react": "^2.4.0",
+        "lucide-react": "^0.471.0",
+        "next": "15.1.4",
+        "next-intl": "^3.26.3",
+        "normalize.css": "^8.0.1",
+        "react": "^19.0.0",
+        "react-dom": "^19.0.0",
+        "react-hook-form": "^7.54.2",
+        "react-redux": "^9.2.0",
+        "redux": "^5.0.1"
+    },
+    "devDependencies": {
+        "@eslint/eslintrc": "^3",
+        "@trivago/prettier-plugin-sort-imports": "^5.2.1",
+        "@types/lodash.debounce": "^4.0.9",
+        "@types/lodash.isequal": "^4.5.8",
+        "@types/lodash.omitby": "^4.6.9",
+        "@types/node": "^20",
+        "@types/react": "^19",
+        "@types/react-dom": "^19",
+        "@types/react-redux": "^7.1.34",
+        "eruda": "^3.4.1",
+        "eslint": "^9",
+        "eslint-config-next": "15.1.4",
+        "postcss": "^8",
+        "prettier": "^3.4.2",
+        "tailwindcss": "^3.4.1",
+        "typescript": "^5"
+    },
+    "type": "module"
+}

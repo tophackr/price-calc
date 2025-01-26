@@ -1,0 +1,11 @@
+.apple-icon {
+    width: 28px;
+    height: 28px;
+    aspect-ratio: 1;
+    border-radius: 7.5px;
+    padding: 4px;
+}
+
+.base-icon {
+    color: var(--tgui--secondary_hint_color);
+}
