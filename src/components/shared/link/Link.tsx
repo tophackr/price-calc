@@ -46,7 +46,7 @@ export const Link: FC<LinkProps> = ({
             {...rest}
             href={href}
             onClick={onClick}
-            className={classNames(className, styles.link)}
+            className={classNames(className, styles['link'])}
         />
     )
 }

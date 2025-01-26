@@ -6,14 +6,16 @@ import { useIsAppleClient } from '@/hooks/use-is-apple-client'
 import styles from './IconCell.module.css'
 
 export interface IconCellProps {
-    Icon: ReactElement
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    Icon: ReactElement<any, any>
     bgColor: CSSProperties['backgroundColor']
 }
 
 export function IconCell({ Icon, bgColor }: IconCellProps) {
     const isApple = useIsAppleClient()
 
-    return cloneElement(Icon, {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return cloneElement(Icon as ReactElement<any>, {
         className: clsx(
             Icon.props.className,
             isApple ? styles['apple-icon'] : styles['base-icon']

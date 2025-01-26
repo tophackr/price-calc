@@ -14,7 +14,7 @@ export function RootLayout({ header, children, footer }: RootLayoutProps) {
         <div className={'flex flex-col h-[100dvh]'}>
             {hasReactNode(header) && header}
 
-            <main className={clsx('flex-1', styles.main)}>{children}</main>
+            <main className={clsx('flex-1', styles['main'])}>{children}</main>
 
             <Placeholder />
 

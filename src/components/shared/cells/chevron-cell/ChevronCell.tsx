@@ -13,9 +13,9 @@ export function ChevronCell({ text }: ChevronCellProps) {
 
     return (
         <>
-            {text && <Text className={styles.subtitle}>{text}</Text>}
+            {text && <Text className={styles['subtitle']}>{text}</Text>}
 
-            {isApple && <Icon16Chevron className={styles.chevron} />}
+            {isApple && <Icon16Chevron className={styles['chevron']} />}
         </>
     )
 }
