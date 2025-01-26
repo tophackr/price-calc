@@ -11,6 +11,8 @@ export async function getLocales(
     return {
         locale,
         messages: fetchMessages.default,
+        locales: locales.slice(),
+        defaultLocale,
         pages: {
             '*': [
                 'Home',
