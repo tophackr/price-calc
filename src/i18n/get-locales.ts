@@ -5,7 +5,7 @@ export async function getLocales(
     locale: Locale = defaultLocale
 ): Promise<TranslationConfig> {
     const fetchMessages = await import(
-        `../../public/locales/${locale === defaultLocale || !locales.includes(locale) ? defaultLocale : locale}.json`
+        `@public/locales/${locale === defaultLocale || !locales.includes(locale) ? defaultLocale : locale}.json`
     )
 
     return {
