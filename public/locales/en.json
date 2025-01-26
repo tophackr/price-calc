@@ -1,48 +1,76 @@
 {
     "Search": {
-        "placeholder": "Search...",
+        "placeholder": "Поиск...",
         "Loading": {
-            "title": "Searching...",
-            "description": "Please wait a moment and you will see everything."
+            "title": "Ищем...",
+            "description": "Подождите немного и вы все увидите."
         },
         "NotFound": {
-            "title": "Nothing found",
-            "description": "Try changing your query."
+            "title": "Ничего не найдено",
+            "description": "Попробуйте изменить запрос."
         },
         "Nothing": {
-            "title": "There's nothing here",
-            "description": "It's time to come up with something!"
+            "title": "Тут ничего нет",
+            "description": "Пора что-то придумать!"
         }
     },
-    "Item": {
+    "Home": {
+        "name": {
+            "title": "Название"
+        },
         "weight": {
-            "input": "Weight",
-            "placeholder": "You need to enter the net weight of the product as indicated on the price tag."
+            "title": "Вес",
+            "footer": "Нужно ввести не полный вес товара который указан на ценнике."
+        },
+        "pieces": {
+            "title": "Количество",
+            "footer": "Нужно ввести количество товара указанный на упаковке."
         },
         "cost": {
-            "input": "Amount",
-            "placeholder": "Enter the amount of the product, and we will calculate the total cost."
+            "title": "Сумма",
+            "footer": "Введите сумму товара, а мы посчитаем полную стоимость."
         },
         "unit": {
-            "title": "Unit of measurement",
+            "title": "Единица измерения",
             "values": {
-                "kg": "kg",
-                "l": "l",
-                "pc": "pc"
+                "kg": "кг",
+                "l": "л",
+                "pc": "шт"
             }
         },
-        "currency": "Currency"
+        "currency": {
+            "title": "Валюта"
+        }
     },
-    "Language": {
-        "header": "Language"
+    "Products": {
+        "header": "Сохраненные Элементы",
+        "button": "Сохранить",
+        "Clear": {
+            "title": "Очистить Историю",
+            "description": "Вы уверены что хотите очистить всю историю? Процесс необратим!",
+            "button": "Очистить"
+        },
+        "Delete": {
+            "button": "Удалить"
+        }
+    },
+    "Settings": {
+        "Language": {
+            "header": "Язык",
+            "footer": "Вы можете помочь нам с переводом! Переходи на платформу <CrowdinLink>Crowdin</CrowdinLink>, и помогай нам стать лучше вместе с тобой!"
+        },
+        "AutoSaveItems": {
+            "title": "Авто сохранение",
+            "footer": "При включенном авто сохранении, все введенные данные будут сохранены к вам в список через 2 секунды, где вы сможете их редактировать."
+        }
     },
     "NotFound": {
-        "title": "Page not found",
-        "description": "Sorry, the requested page was not found.",
-        "button": "Go to homepage"
+        "title": "Страница не найдена",
+        "description": "Извините, запрашиваемая страница не найдена.",
+        "button": "На главную"
     },
     "PopupUnauthorizedError": {
-        "title": "Session has expired",
-        "description": "Please close the application and reopen it."
+        "title": "Время сеанса истекло",
+        "description": "Пожалуйста, закройте приложение и откройте его заново."
     }
 }
