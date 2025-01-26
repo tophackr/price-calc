@@ -5,7 +5,7 @@ import { type PropsWithChildren, useEffect, useState } from 'react'
 import { Loader } from '@/components/ui/Loader'
 import { useLocale } from '@/store/lang/use-locale'
 import { defaultTimeZone } from '@/i18n/config'
-import { getLocales } from '@/i18n/getLocales'
+import { getLocales } from '@/i18n/get-locales'
 import type { Translation } from '@/i18n/types'
 
 export function ClientI18nProvider({ children }: PropsWithChildren) {
