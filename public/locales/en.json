@@ -1,25 +1,25 @@
 {
     "Search": {
-        "placeholder": "Поиск...",
+        "placeholder": "Search...",
         "Loading": {
-            "title": "Ищем...",
-            "description": "Подождите немного и вы все увидите."
+            "title": "Searching...",
+            "description": "Please wait a moment and you will see everything."
         },
         "NotFound": {
-            "title": "Ничего не найдено",
-            "description": "Попробуйте изменить запрос."
+            "title": "Nothing found",
+            "description": "Try changing your query."
         },
         "Nothing": {
-            "title": "Тут ничего нет",
-            "description": "Пора что-то придумать!"
+            "title": "There's nothing here",
+            "description": "It's time to come up with something!"
         }
     },
     "Home": {
         "name": {
-            "title": "Название"
+            "title": "Name"
         },
         "weight": {
-            "title": "Вес",
+            "title": "Weight",
             "footer": "Нужно ввести не полный вес товара который указан на ценнике."
         },
         "pieces": {
@@ -65,12 +65,12 @@
         }
     },
     "NotFound": {
-        "title": "Страница не найдена",
-        "description": "Извините, запрашиваемая страница не найдена.",
-        "button": "На главную"
+        "title": "Page not found",
+        "description": "Sorry, the requested page was not found.",
+        "button": "Go to homepage"
     },
     "PopupUnauthorizedError": {
-        "title": "Время сеанса истекло",
-        "description": "Пожалуйста, закройте приложение и откройте его заново."
+        "title": "Session has expired",
+        "description": "Please close the application and reopen it."
     }
 }
