@@ -1,9 +1,9 @@
-import { getLocale } from 'next-intl/server'
+import { useLocale } from 'next-intl'
 import type { PropsWithChildren } from 'react'
 import { Providers } from '@/app/providers'
 
-export async function AppLayout({ children }: PropsWithChildren) {
-    const locale = await getLocale()
+export function AppLayout({ children }: PropsWithChildren) {
+    const locale = useLocale()
 
     return (
         <html lang={locale}>
