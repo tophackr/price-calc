@@ -1,9 +1,9 @@
 import { defaultLocale, locales } from '@/core/i18n/config'
-import type { Locale, TranslationFetchConfig } from '@/core/i18n/types'
+import type { Locale, TranslationConfig } from '@/core/i18n/types'
 
 export async function getLocales(
     locale: Locale = defaultLocale
-): Promise<TranslationFetchConfig> {
+): Promise<TranslationConfig> {
     const fetchMessages = await import(
         `@public/locales/${locale === defaultLocale || !locales.includes(locale) ? defaultLocale : locale}.json`
     )

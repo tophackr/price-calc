@@ -17,7 +17,7 @@ export interface TranslationClient {
     t: ReturnType<typeof useTranslations>
 }
 
-export interface TranslationFetchConfig {
+export interface TranslationConfig {
     locale: Locale
     messages: Translation
     pages: Record<string, Array<keyof Translation>>
