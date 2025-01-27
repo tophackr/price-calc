@@ -1,5 +1,6 @@
 import { Section } from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
+import { defaultMaxProducts } from '@/constants/default.constants'
 import { useProducts } from '@/store/products/use-products'
 import { ClearButton } from './ClearButton'
 import type { ItemProps } from './Products.interface'
@@ -25,7 +26,16 @@ export function Products({ item }: ItemProps) {
 
     return (
         !!productsValues.length && (
-            <Section header={t('header')}>
+            <Section
+                header={
+                    <div className={'flex justify-between'}>
+                        <Section.Header>{t('header')}</Section.Header>
+                        <Section.Header>
+                            {productsValues.length} / {defaultMaxProducts}
+                        </Section.Header>
+                    </div>
+                }
+            >
                 {productsValues.map((item, index) => (
                     <ProductsItem
                         key={index}
