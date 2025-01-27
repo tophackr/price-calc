@@ -8,7 +8,7 @@ import { NotFound } from '@/components/ui/not-found/NotFound'
 import type { Currency } from '@/shared/enums/currency.enum'
 import type { Unit } from '@/shared/enums/unit.enum'
 import type { ICalculateCosts } from '@/shared/interfaces/calculate-cost.interface'
-import type { ItemForm, ItemIdProps } from '@/shared/interfaces/item.interface'
+import type { ItemIdProps, ItemOrder } from '@/shared/interfaces/item.interface'
 import { useProducts } from '@/store/products/use-products'
 import { useBackButton } from '@/hooks/use-back-button'
 import { useSettingsButton } from '@/hooks/use-settings-button'
@@ -53,7 +53,7 @@ export function ItemId({ id }: ItemIdProps) {
     const [currency, setCurrency] = useState(item.currency)
 
     // eslint-disable-next-line react-hooks/rules-of-hooks
-    const { watch, reset, getValues, ...rest } = useForm<ItemForm>({
+    const { watch, reset, getValues, ...rest } = useForm<ItemOrder>({
         defaultValues: {
             quantity: item.quantity,
             cost: item.cost,
@@ -62,7 +62,7 @@ export function ItemId({ id }: ItemIdProps) {
         mode: 'onChange'
     })
 
-    const handleCallback = ({ quantity, cost }: ItemForm) => {
+    const handleCallback = ({ quantity, cost }: ItemOrder) => {
         if (!quantity || !cost) {
             return
         }
