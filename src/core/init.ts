@@ -51,7 +51,7 @@ export function init(debug: boolean): void {
     if (!themeParams.isCssVarsBound()) themeParams.bindCssVars()
 
     // Add Eruda if needed.
-    if (debug || true) {
+    if (debug) {
         import('eruda').then(lib => lib.default.init()).catch(console.error)
     }
 }
