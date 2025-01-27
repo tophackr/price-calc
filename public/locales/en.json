@@ -14,27 +14,55 @@
             "description": "It's time to come up with something!"
         }
     },
-    "Item": {
+    "Home": {
+        "name": {
+            "title": "Name"
+        },
         "weight": {
-            "input": "Weight",
-            "placeholder": "You need to enter the net weight of the product as indicated on the price tag."
+            "title": "Weight",
+            "footer": "You do not need to enter the full weight of the product that is indicated on the price tag."
+        },
+        "pieces": {
+            "title": "Quantity",
+            "footer": "You need to enter the quantity of the product indicated on the package."
         },
         "cost": {
-            "input": "Amount",
-            "placeholder": "Enter the amount of the product, and we will calculate the total cost."
+            "title": "Cost",
+            "footer": "Enter the amount of the product, and we will calculate the full cost."
         },
         "unit": {
-            "title": "Unit of measurement",
+            "title": "Unit",
             "values": {
                 "kg": "kg",
                 "l": "l",
                 "pc": "pc"
             }
         },
-        "currency": "Currency"
+        "currency": {
+            "title": "Currency"
+        }
     },
-    "Language": {
-        "header": "Language"
+    "Products": {
+        "header": "Saved Items",
+        "button": "Save",
+        "Clear": {
+            "title": "Clear Data",
+            "description": "Are you sure you want to clear the whole story? The process is irreversible!",
+            "button": "Clear"
+        },
+        "Delete": {
+            "button": "Delete"
+        }
+    },
+    "Settings": {
+        "Language": {
+            "header": "Language",
+            "footer": "You can help us with the translation! Switch to the <CrowdinLink>Crowdin</CrowdinLink> platform, and help us become better together with you!"
+        },
+        "AutoSaveItems": {
+            "title": "Autosave",
+            "footer": "When auto-save is enabled, all entered data will be saved to your list in 2 seconds, where you can edit them."
+        }
     },
     "NotFound": {
         "title": "Page not found",
