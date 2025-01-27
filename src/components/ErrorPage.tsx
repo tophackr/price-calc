@@ -16,10 +16,7 @@ export function ErrorPage({
         <div>
             <h2>An unhandled error occurred!</h2>
             <blockquote>
-                <code>
-                    {error.message}
-                    {error.toString()}
-                </code>
+                <code>{error.message}</code>
             </blockquote>
             {reset && <button onClick={() => reset()}>Try again</button>}
         </div>
