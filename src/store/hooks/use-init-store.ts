@@ -1,3 +1,4 @@
+import { useClientOnce } from '@/hooks/use-client-once'
 import { getAutoSaveItems } from '../auto-save-items/auto-save-items'
 import { useAutoSaveItems } from '../auto-save-items/use-auto-save-items'
 import { getCurrency } from '../currency/currency'
@@ -11,17 +12,16 @@ import { useUnit } from '../unit/use-unit'
 
 export function useInitStore() {
     const { setLocale } = useLocale()
-    getLocale().then(setLocale)
-
     const { setUnit } = useUnit()
-    getUnit().then(setUnit)
-
     const { setCurrency } = useCurrency()
-    getCurrency().then(setCurrency)
-
     const { setAutoSaveItems } = useAutoSaveItems()
-    getAutoSaveItems().then(setAutoSaveItems)
-
     const { setProducts } = useProducts()
-    getProducts().then(setProducts)
+
+    useClientOnce(() => {
+        getLocale().then(setLocale)
+        getUnit().then(setUnit)
+        getCurrency().then(setCurrency)
+        getAutoSaveItems().then(setAutoSaveItems)
+        getProducts().then(setProducts)
+    })
 }
