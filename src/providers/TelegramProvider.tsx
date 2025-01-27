@@ -33,8 +33,6 @@ function RootInner({ children }: PropsWithChildren) {
 
     const isDark = useSignal(miniApp.isDark)
 
-    /* useClientOnce(() => {
-    }) */
     useInitStore()
 
     return (
