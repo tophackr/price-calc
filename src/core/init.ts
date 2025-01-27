@@ -38,8 +38,6 @@ export function init(debug: boolean): void {
             .mount()
             .then(async () => {
                 if (!viewport.isCssVarsBound()) viewport.bindCssVars()
-                if (!viewport.isFullscreen())
-                    await viewport.requestFullscreen.ifAvailable()
             })
             .catch(e => {
                 console.error('Something went wrong mounting the viewport', e)
