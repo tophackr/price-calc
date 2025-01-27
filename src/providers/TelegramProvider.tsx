@@ -33,10 +33,9 @@ function RootInner({ children }: PropsWithChildren) {
 
     const isDark = useSignal(miniApp.isDark)
 
-    useClientOnce(() => {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useInitStore()
-    })
+    /* useClientOnce(() => {
+    }) */
+    useInitStore()
 
     return (
         <AppRoot
