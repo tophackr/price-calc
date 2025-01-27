@@ -22,7 +22,7 @@ export function DeleteButton({ id, products, setProducts }: DeleteButtonProps) {
 
         setProducts(data)
 
-        return router.push(PAGES_URL.HOME)
+        router.push(PAGES_URL.HOME)
     }
 
     return (
