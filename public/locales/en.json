@@ -20,48 +20,48 @@
         },
         "weight": {
             "title": "Weight",
-            "footer": "Нужно ввести не полный вес товара который указан на ценнике."
+            "footer": "You do not need to enter the full weight of the product that is indicated on the price tag."
         },
         "pieces": {
-            "title": "Количество",
-            "footer": "Нужно ввести количество товара указанный на упаковке."
+            "title": "Quantity",
+            "footer": "You need to enter the quantity of the product indicated on the package."
         },
         "cost": {
-            "title": "Сумма",
-            "footer": "Введите сумму товара, а мы посчитаем полную стоимость."
+            "title": "Cost",
+            "footer": "Enter the amount of the product, and we will calculate the full cost."
         },
         "unit": {
-            "title": "Единица измерения",
+            "title": "Unit",
             "values": {
-                "kg": "кг",
-                "l": "л",
-                "pc": "шт"
+                "kg": "kg",
+                "l": "l",
+                "pc": "pc"
             }
         },
         "currency": {
-            "title": "Валюта"
+            "title": "Currency"
         }
     },
     "Products": {
-        "header": "Сохраненные Элементы",
-        "button": "Сохранить",
+        "header": "Saved Items",
+        "button": "Save",
         "Clear": {
-            "title": "Очистить Историю",
-            "description": "Вы уверены что хотите очистить всю историю? Процесс необратим!",
-            "button": "Очистить"
+            "title": "Clear Data",
+            "description": "Are you sure you want to clear the whole story? The process is irreversible!",
+            "button": "Clear"
         },
         "Delete": {
-            "button": "Удалить"
+            "button": "Delete"
         }
     },
     "Settings": {
         "Language": {
-            "header": "Язык",
-            "footer": "Вы можете помочь нам с переводом! Переходи на платформу <CrowdinLink>Crowdin</CrowdinLink>, и помогай нам стать лучше вместе с тобой!"
+            "header": "Language",
+            "footer": "You can help us with the translation! Switch to the <CrowdinLink>Crowdin</CrowdinLink> platform, and help us become better together with you!"
         },
         "AutoSaveItems": {
-            "title": "Авто сохранение",
-            "footer": "При включенном авто сохранении, все введенные данные будут сохранены к вам в список через 2 секунды, где вы сможете их редактировать."
+            "title": "Autosave",
+            "footer": "When auto-save is enabled, all entered data will be saved to your list in 2 seconds, where you can edit them."
         }
     },
     "NotFound": {
