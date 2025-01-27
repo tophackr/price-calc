@@ -1,7 +1,7 @@
 export interface ItemForm {
     name?: string
-    quantity: number
-    cost: number
+    quantity?: number
+    cost?: number
 }
 
 export interface ItemIdProps {
