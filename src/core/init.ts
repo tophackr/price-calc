@@ -1,6 +1,5 @@
 import {
     $debug,
-    addToHomeScreen,
     backButton,
     initData,
     init as initSDK,
@@ -28,7 +27,6 @@ export function init(debug: boolean): void {
     if (settingsButton.mount.isAvailable()) {
         settingsButton.mount()
     }
-    if (addToHomeScreen.isAvailable()) addToHomeScreen()
 
     if (!miniApp.isMounted()) miniApp.mount()
     if (!themeParams.isMounted()) themeParams.mount()
