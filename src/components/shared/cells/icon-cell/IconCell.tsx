@@ -22,7 +22,8 @@ export function IconCell({ Icon, bgColor }: IconCellProps) {
         ),
         style: isApple
             ? {
-                  backgroundColor: bgColor
+                  backgroundColor: bgColor,
+                  color: '#fff'
               }
             : {}
     })
