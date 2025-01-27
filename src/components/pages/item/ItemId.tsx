@@ -1,10 +1,10 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { notFound } from 'next/navigation'
 import { useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { InputForm } from '@/components/pages/input-form/Input.form'
-import { NotFound } from '@/components/ui/not-found/NotFound'
 import type { Currency } from '@/shared/enums/currency.enum'
 import type { Unit } from '@/shared/enums/unit.enum'
 import type { ICalculateCosts } from '@/shared/interfaces/calculate-cost.interface'
@@ -38,21 +38,17 @@ export function ItemId({ id }: ItemIdProps) {
     const item = products[Number(id)]
 
     if (!item) {
-        return <NotFound />
+        notFound()
     }
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [total, setTotal] = useState<ICalculateCosts>({
         rounded: item.rounded,
         costRounded: item.costRounded,
         remainder: item.remainder
     })
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [unit, setUnit] = useState(item.unit)
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const [currency, setCurrency] = useState(item.currency)
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     const { watch, reset, getValues, ...rest } = useForm<ItemOrder>({
         defaultValues: {
             quantity: item.quantity,
@@ -74,7 +70,6 @@ export function ItemId({ id }: ItemIdProps) {
         )
     }
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useWatchForm({ watch, callback: handleCallback })
 
     const onChangeUnit = (value: string) => {
@@ -94,7 +89,6 @@ export function ItemId({ id }: ItemIdProps) {
         setCurrency(value as Currency)
     }
 
-    // eslint-disable-next-line react-hooks/rules-of-hooks
     useSaveProduct({
         itemId: Number(id),
         item,
