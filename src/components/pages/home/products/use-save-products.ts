@@ -2,6 +2,7 @@ import { mainButton } from '@telegram-apps/sdk-react'
 import debounce from 'lodash.debounce'
 import { useTranslations } from 'next-intl'
 import { useEffect } from 'react'
+import { defaultMaxProducts } from '@/constants/default.constants'
 import { useAutoSaveItems } from '@/store/auto-save-items/use-auto-save-items'
 import type { IProduct } from '@/store/products/products.types'
 import { useMainButton } from '@/hooks/use-main-button'
@@ -24,7 +25,7 @@ export function useSaveProducts({
     const handleSave = () => {
         const data = [...structuredClone(products), item]
 
-        if (data.length > 10) {
+        if (data.length > defaultMaxProducts) {
             data.shift()
         }
 
