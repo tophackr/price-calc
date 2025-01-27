@@ -33,8 +33,6 @@ export function useSaveProduct({
     useEffect(() => {
         const toVisible = !isEqualWithoutUndefined(initData, item)
 
-        console.log(initData, item)
-
         if (!mainButton.isVisible() && toVisible) {
             mainButton.setParams({ isVisible: true })
         } else if (mainButton.isVisible() && !toVisible) {
