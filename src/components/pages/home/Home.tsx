@@ -41,7 +41,6 @@ export function Home() {
     const [currency, setCurrency] = useState(currencyData)
 
     const { watch, reset, getValues, ...rest } = useForm<ItemForm>({
-        defaultValues: { quantity: 0, cost: 0 },
         mode: 'onChange'
     })
 
