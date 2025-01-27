@@ -93,6 +93,8 @@ export function Home() {
                     remainder: total.remainder,
                     unit,
                     currency,
+                    quantity: 0,
+                    cost: 0,
                     ...getValues()
                 }}
             />
