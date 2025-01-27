@@ -1,8 +1,10 @@
-export interface ItemForm {
+export interface ItemOrder {
     name?: string
-    quantity?: number
-    cost?: number
+    quantity: number
+    cost: number
 }
+
+export type ItemForm = Partial<ItemOrder>
 
 export interface ItemIdProps {
     id: string
