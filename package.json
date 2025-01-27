@@ -4,8 +4,7 @@
     "private": true,
     "homepage": "https://price-calc.tophackr.com",
     "scripts": {
-        "dev": "next dev --turbopack",
-        "dev:https": "next dev --turbopack --experimental-https",
+        "dev": "next dev --turbopack --experimental-https",
         "build": "next build",
         "start": "next start",
         "lint": "next lint"
