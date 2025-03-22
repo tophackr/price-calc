@@ -10,10 +10,12 @@ export function AppLayout({ children }: PropsWithChildren) {
     return (
         <html lang={locale}>
             <body>
-                <Providers>{children}</Providers>
+                <div id={'app'}>
+                    <Providers>{children}</Providers>
 
-                <Placeholder />
-                <SpeedInsights />
+                    <Placeholder />
+                    <SpeedInsights />
+                </div>
             </body>
         </html>
     )

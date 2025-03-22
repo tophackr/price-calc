@@ -4,6 +4,17 @@
 
 body {
     background: var(--tg-theme-secondary-bg-color, #181818);
+    height: 100vh;
+    overflow: hidden;
+}
+
+#app {
+    height: 100%;
+    overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+    display: none;
 }
 
 input[type='time']::-webkit-calendar-picker-indicator,
@@ -14,4 +25,12 @@ input[type='date']::-webkit-calendar-picker-indicator {
 .tgui-56b2e897ed7ccb22 > .tgui-8ca550c2fc85eff5 {
     padding: 0;
     background: transparent;
+}
+
+.tgui-919c5658483cae11 svg {
+    margin-left: 1rem;
+}
+
+.tgui-7707c5d942b7b9af .tgui-0f5050defacbf813 {
+    background: var(--tg-theme-section-bg-color);
 }

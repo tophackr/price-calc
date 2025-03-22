@@ -11,7 +11,7 @@ export function SelectSkeleton() {
             <Select
                 before={
                     <IconCell
-                        Icon={<Group className={'ml-4'} />}
+                        Icon={<Group />}
                         bgColor={'MediumPurple'}
                     />
                 }
@@ -23,7 +23,7 @@ export function SelectSkeleton() {
             <Select
                 before={
                     <IconCell
-                        Icon={<Banknote className={'ml-4'} />}
+                        Icon={<Banknote />}
                         bgColor={'LimeGreen'}
                     />
                 }

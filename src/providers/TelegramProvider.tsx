@@ -35,6 +35,11 @@ function RootInner({ children }: PropsWithChildren) {
 
     useInitStore()
 
+    // TODO: temp fix for ios
+    useEffect(() => {
+        postEvent('web_app_request_theme')
+    }, [])
+
     return (
         <AppRoot
             appearance={isDark ? 'dark' : 'light'}

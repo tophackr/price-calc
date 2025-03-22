@@ -20,7 +20,7 @@ export function LanguageSkeleton() {
             <Select
                 before={
                     <IconCell
-                        Icon={<Earth className={'ml-4'} />}
+                        Icon={<Earth />}
                         bgColor={'DodgerBlue'}
                     />
                 }
