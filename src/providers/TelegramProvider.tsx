@@ -1,8 +1,13 @@
 'use client'
 
-import { miniApp, useLaunchParams, useSignal } from '@telegram-apps/sdk-react'
+import {
+    miniApp,
+    postEvent,
+    useLaunchParams,
+    useSignal
+} from '@telegram-apps/sdk-react'
 import { AppRoot } from '@telegram-apps/telegram-ui'
-import { type PropsWithChildren } from 'react'
+import { type PropsWithChildren, useEffect } from 'react'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { ErrorPage } from '@/components/ErrorPage'
 import { Loader } from '@/components/ui/Loader'
