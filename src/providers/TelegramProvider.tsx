@@ -15,7 +15,6 @@ import { init } from '@/core/init'
 import { useInitStore } from '@/store/hooks/use-init-store'
 import { useClientOnce } from '@/hooks/use-client-once'
 import { useDidMount } from '@/hooks/use-did-mount'
-import { useEffectOnce } from '@/hooks/use-effect-once'
 import { useIsAppleClient } from '@/hooks/use-is-apple-client'
 import { useTelegramMock } from '@/hooks/use-telegram-mock'
 
@@ -45,11 +44,6 @@ function RootInner({ children }: PropsWithChildren) {
     useEffect(() => {
         postEvent('web_app_request_theme')
     }, [])
-
-    useEffectOnce(() => {
-        miniApp.ready()
-        postEvent('web_app_ready')
-    })
 
     return (
         <AppRoot
