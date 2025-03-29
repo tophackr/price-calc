@@ -48,6 +48,8 @@ export function init(debug: boolean): void {
     if (!miniApp.isCssVarsBound()) miniApp.bindCssVars()
     if (!themeParams.isCssVarsBound()) themeParams.bindCssVars()
 
+    miniApp.ready()
+
     // Add Eruda if needed.
     if (debug) {
         import('eruda').then(lib => lib.default.init()).catch(console.error)
