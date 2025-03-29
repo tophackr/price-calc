@@ -43,8 +43,13 @@ function RootInner({ children }: PropsWithChildren) {
     // TODO: temp fix for ios
     useEffect(() => {
         postEvent('web_app_request_theme')
-        postEvent('web_app_ready')
     }, [])
+
+    useEffect(() => {
+        miniApp.ready()
+        postEvent('web_app_ready')
+        console.log('ready')
+    })
 
     return (
         <AppRoot
