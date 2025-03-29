@@ -46,10 +46,9 @@ function RootInner({ children }: PropsWithChildren) {
     }, [])
 
     useEffect(() => {
-        miniApp.ready()
         postEvent('web_app_ready')
-        console.log('ready')
-    })
+        console.log('ready', debug)
+    }, [debug])
 
     return (
         <AppRoot

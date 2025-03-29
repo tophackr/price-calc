@@ -10,6 +10,7 @@ import {
     themeParams,
     viewport
 } from '@telegram-apps/sdk-react'
+import { initIframe } from './initIframe'
 
 /**
  * Initializes the application and configures its dependencies.
@@ -18,6 +19,8 @@ export function init(debug: boolean): void {
     // Set @telegram-apps/sdk-react debug mode.
     $debug.set(debug)
     $targetOrigin.set('https://platformer-hq.github.io')
+
+    initIframe()
 
     // Initialize special event handlers for Telegram Desktop, Android, iOS, etc.
     // Also, configure the package.
