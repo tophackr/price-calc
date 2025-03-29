@@ -1,10 +1,12 @@
-import { type LaunchParams, useLaunchParams } from '@telegram-apps/sdk-react'
+import {
+    type LaunchParams,
+    retrieveLaunchParams
+} from '@telegram-apps/sdk-react'
 
 export function useIsAppleClient(lp?: LaunchParams): boolean {
     if (!lp) {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        lp = useLaunchParams()
+        lp = retrieveLaunchParams()
     }
 
-    return ['macos', 'ios'].includes(lp.platform)
+    return ['macos', 'ios'].includes(lp.tgWebAppPlatform)
 }

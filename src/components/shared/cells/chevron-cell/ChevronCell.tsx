@@ -1,6 +1,6 @@
-import { useLaunchParams } from '@telegram-apps/sdk-react'
 import { Text } from '@telegram-apps/telegram-ui'
 import { Icon16Chevron } from '@telegram-apps/telegram-ui/dist/icons/16/chevron'
+import { useIsAppleClient } from '@/hooks/use-is-apple-client'
 import styles from './ChevronCell.module.css'
 
 export interface ChevronCellProps {
@@ -8,8 +8,7 @@ export interface ChevronCellProps {
 }
 
 export function ChevronCell({ text }: ChevronCellProps) {
-    const lp = useLaunchParams()
-    const isApple = ['macos', 'ios'].includes(lp.platform)
+    const isApple = useIsAppleClient()
 
     return (
         <>

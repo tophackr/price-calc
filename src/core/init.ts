@@ -1,26 +1,22 @@
 import {
-    $debug,
-    $targetOrigin,
     backButton,
     initData,
     init as initSDK,
     mainButton,
     miniApp,
+    setDebug,
     settingsButton,
-    themeParams,
+    targetOrigin,
     viewport
 } from '@telegram-apps/sdk-react'
-import { initIframe } from './initIframe'
 
 /**
  * Initializes the application and configures its dependencies.
  */
 export function init(debug: boolean): void {
     // Set @telegram-apps/sdk-react debug mode.
-    $debug.set(debug)
-    $targetOrigin.set('https://platformer-hq.github.io')
-
-    initIframe()
+    setDebug(debug)
+    targetOrigin.set('https://platformer-hq.github.io')
 
     // Initialize special event handlers for Telegram Desktop, Android, iOS, etc.
     // Also, configure the package.
@@ -34,7 +30,6 @@ export function init(debug: boolean): void {
     }
 
     if (!miniApp.isMounted()) miniApp.mount()
-    if (!themeParams.isMounted()) themeParams.mount()
 
     initData.restore()
 
@@ -48,10 +43,6 @@ export function init(debug: boolean): void {
                 console.error('Something went wrong mounting the viewport', e)
             })
     }
-
-    // Define components-related CSS variables.
-    if (!miniApp.isCssVarsBound()) miniApp.bindCssVars()
-    if (!themeParams.isCssVarsBound()) themeParams.bindCssVars()
 
     // Add Eruda if needed.
     if (debug) {

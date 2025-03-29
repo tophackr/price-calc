@@ -3,7 +3,7 @@
 import {
     miniApp,
     postEvent,
-    useLaunchParams,
+    retrieveLaunchParams,
     useSignal
 } from '@telegram-apps/sdk-react'
 import { AppRoot } from '@telegram-apps/telegram-ui'
@@ -12,24 +12,27 @@ import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { ErrorPage } from '@/components/ErrorPage'
 import { Loader } from '@/components/ui/Loader'
 import { init } from '@/core/init'
+import { mockEnv } from '@/core/mockEnv'
 import { useInitStore } from '@/store/hooks/use-init-store'
 import { useClientOnce } from '@/hooks/use-client-once'
 import { useDidMount } from '@/hooks/use-did-mount'
 import { useIsAppleClient } from '@/hooks/use-is-apple-client'
-import { useTelegramMock } from '@/hooks/use-telegram-mock'
 
 function RootInner({ children }: PropsWithChildren) {
     const isDev = process.env.NODE_ENV === 'development'
 
     // Mock Telegram environment in development mode if needed.
-    if (isDev) {
+    /* if (isDev) {
         // eslint-disable-next-line react-hooks/rules-of-hooks
         useTelegramMock()
-    }
+    } */
+    useClientOnce(() => {
+        mockEnv(isDev)
+    })
 
-    const lp = useLaunchParams()
+    const lp = retrieveLaunchParams()
     const isApple = useIsAppleClient(lp)
-    const debug = isDev || lp.startParam === 'debug'
+    const debug = isDev || lp.tgWebAppStartParam === 'debug'
 
     // Initialize the library.
     useClientOnce(() => {
@@ -46,9 +49,10 @@ function RootInner({ children }: PropsWithChildren) {
     }, [])
 
     useEffect(() => {
+        miniApp.ready()
         postEvent('web_app_ready')
-        console.log('ready', debug)
-    }, [debug])
+        console.log('ready')
+    }, [])
 
     return (
         <AppRoot

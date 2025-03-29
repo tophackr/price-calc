@@ -11,7 +11,7 @@ export function ClearButton({ onClick }: ClearButtonProps) {
 
     const onButtonClick = () => {
         popup
-            .open({
+            .show({
                 title: t('title'),
                 message: t('description'),
                 buttons: [

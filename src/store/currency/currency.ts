@@ -8,9 +8,11 @@ export const defaultCurrency = Currency.ruble
 export async function getCurrency(): Promise<Currency> {
     if (!cloudStorage.isSupported()) return defaultCurrency
 
-    const currency = await cloudStorage.getItem(CURRENCY_NAME)
+    const currency = await cloudStorage.getItem([CURRENCY_NAME])
 
-    return (currency || defaultCurrency) as Currency
+    console.log('currency', currency)
+
+    return (currency[CURRENCY_NAME] || defaultCurrency) as Currency
 }
 
 export async function setCurrency(currency?: Currency) {

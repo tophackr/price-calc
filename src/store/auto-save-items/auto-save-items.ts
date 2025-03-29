@@ -7,9 +7,9 @@ export const defaultAutoSaveItems = false
 export async function getAutoSaveItems(): Promise<boolean> {
     if (!cloudStorage.isSupported()) return defaultAutoSaveItems
 
-    const asi = await cloudStorage.getItem(ASI_NAME)
+    const asi = await cloudStorage.getItem([ASI_NAME])
 
-    return asi ? Boolean(Number(asi)) : defaultAutoSaveItems
+    return asi ? Boolean(Number(asi[ASI_NAME])) : defaultAutoSaveItems
 }
 
 export async function setAutoSaveItems(asi?: boolean) {

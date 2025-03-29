@@ -1,4 +1,5 @@
-import { classNames, openLink } from '@telegram-apps/sdk-react'
+import { openLink } from '@telegram-apps/sdk-react'
+import clsx from 'clsx'
 import { default as NextLink, type LinkProps as NextLinkProps } from 'next/link'
 import { type FC, type JSX, type MouseEventHandler, useCallback } from 'react'
 import styles from './Link.module.css'
@@ -46,7 +47,7 @@ export const Link: FC<LinkProps> = ({
             {...rest}
             href={href}
             onClick={onClick}
-            className={classNames(className, styles['link'])}
+            className={clsx(className, styles['link'])}
         />
     )
 }

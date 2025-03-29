@@ -8,9 +8,9 @@ export const defaultProducts = []
 export async function getProducts(): Promise<IProduct[]> {
     if (!cloudStorage.isSupported()) return defaultProducts
 
-    const products = await cloudStorage.getItem(PRODUCT_NAME)
+    const products = await cloudStorage.getItem([PRODUCT_NAME])
 
-    return products ? JSON.parse(products) : defaultProducts
+    return products ? JSON.parse(products[PRODUCT_NAME]) : defaultProducts
 }
 
 export async function setProducts(products?: IProduct[]) {
