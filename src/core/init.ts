@@ -5,7 +5,6 @@ import {
     init as initSDK,
     mainButton,
     miniApp,
-    postEvent,
     settingsButton,
     themeParams,
     viewport
@@ -48,8 +47,6 @@ export function init(debug: boolean): void {
     // Define components-related CSS variables.
     if (!miniApp.isCssVarsBound()) miniApp.bindCssVars()
     if (!themeParams.isCssVarsBound()) themeParams.bindCssVars()
-
-    postEvent('web_app_ready')
 
     // Add Eruda if needed.
     if (debug) {
