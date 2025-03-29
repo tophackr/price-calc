@@ -1,5 +1,6 @@
 import {
     $debug,
+    $targetOrigin,
     backButton,
     initData,
     init as initSDK,
@@ -16,6 +17,7 @@ import {
 export function init(debug: boolean): void {
     // Set @telegram-apps/sdk-react debug mode.
     $debug.set(debug)
+    $targetOrigin.set('https://platformer-hq.github.io')
 
     // Initialize special event handlers for Telegram Desktop, Android, iOS, etc.
     // Also, configure the package.
