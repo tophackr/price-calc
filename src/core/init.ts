@@ -2,11 +2,14 @@ import {
     backButton,
     initData,
     init as initSDK,
+    isConcurrentCallError,
+    isFunctionNotAvailableError,
     mainButton,
     miniApp,
     setDebug,
     settingsButton,
     targetOrigin,
+    themeParams,
     viewport
 } from '@telegram-apps/sdk-react'
 
@@ -29,20 +32,55 @@ export function init(debug: boolean): void {
         settingsButton.mount()
     }
 
-    if (!miniApp.isMounted()) miniApp.mount()
+    if (!miniApp.isMounted()) {
+        miniApp
+            .mount()
+            .catch(error => {
+                if (!isConcurrentCallError(error)) throw error
+            })
+            .then(() => {
+                if (!miniApp.isCssVarsBound()) miniApp.bindCssVars()
+            })
+            .catch(error => {
+                if (!isFunctionNotAvailableError(error)) throw error
+            })
+    }
+    if (!themeParams.isMounted()) {
+        themeParams
+            .mount()
+            .catch(error => {
+                if (!isConcurrentCallError(error)) throw error
+            })
+            .then(() => {
+                if (!themeParams.isCssVarsBound()) themeParams.bindCssVars()
+            })
+            .catch(error => {
+                if (!isFunctionNotAvailableError(error)) throw error
+            })
+    }
 
     initData.restore()
 
     if (!viewport.isMounted()) {
         void viewport
             .mount()
-            .then(async () => {
+            .catch(error => {
+                if (!isConcurrentCallError(error)) throw error
+            })
+            .then(() => {
                 if (!viewport.isCssVarsBound()) viewport.bindCssVars()
             })
-            .catch(e => {
-                console.error('Something went wrong mounting the viewport', e)
+            .catch(error => {
+                if (!isFunctionNotAvailableError(error)) {
+                    console.error(
+                        'Something went wrong mounting the viewport',
+                        error
+                    )
+                }
             })
     }
+
+    miniApp.ready()
 
     // Add Eruda if needed.
     if (debug) {
