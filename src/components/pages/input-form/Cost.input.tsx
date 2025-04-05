@@ -3,7 +3,7 @@ import { Sigma } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useFormContext } from 'react-hook-form'
 import type { ItemForm } from '@/shared/interfaces/item.interface'
-import { IconCell } from '../../shared/cells/icon-cell/IconCell'
+import { IconCell } from '../../shared/icon-cell/IconCell'
 
 export function CostInput() {
     const t = useTranslations('Home.cost')

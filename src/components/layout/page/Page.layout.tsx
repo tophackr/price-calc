@@ -1,6 +1,8 @@
 import { List } from '@telegram-apps/telegram-ui'
-import type { PropsWithChildren } from 'react'
+import { type PropsWithChildren, memo } from 'react'
 
-export default function PageLayout({ children }: PropsWithChildren) {
+export const PageLayout = memo(function PageLayout({
+    children
+}: PropsWithChildren) {
     return <List>{children}</List>
-}
+})

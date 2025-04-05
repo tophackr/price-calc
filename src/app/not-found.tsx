@@ -1,12 +1,9 @@
 import type { Metadata } from 'next'
-import { NotFound } from '@/components/ui/not-found/NotFound'
 import { NO_INDEX_PAGE } from '@/constants/seo.constants'
+
+export { NotFound as default } from '@/components/ui/not-found/NotFound'
 
 export const metadata: Metadata = {
     title: 'Page not found',
     ...NO_INDEX_PAGE
-}
-
-export default function NotFoundPage() {
-    return <NotFound />
 }

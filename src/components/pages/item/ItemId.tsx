@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'
 import { notFound } from 'next/navigation'
-import { useState } from 'react'
+import { memo, useCallback, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { InputForm } from '@/components/pages/input-form/Input.form'
 import type { Currency } from '@/shared/enums/currency.enum'
@@ -30,7 +30,7 @@ const DynamicName = dynamic(
     }
 )
 
-export function ItemId({ id }: ItemIdProps) {
+export const ItemId = memo(function ItemId({ id }: ItemIdProps) {
     useSettingsButton()
     useBackButton()
 
@@ -58,36 +58,42 @@ export function ItemId({ id }: ItemIdProps) {
         mode: 'onChange'
     })
 
-    const handleCallback = ({ quantity, cost }: ItemOrder) => {
-        if (!quantity || !cost) {
-            return
-        }
+    const handleCallback = useCallback(
+        ({ quantity, cost }: ItemOrder) => {
+            if (!quantity || !cost) {
+                return
+            }
 
-        setTotal(
-            isWeight(unit)
-                ? calculateWeight(quantity, cost)
-                : calculatePieces(quantity, cost)
-        )
-    }
+            setTotal(
+                isWeight(unit)
+                    ? calculateWeight(quantity, cost)
+                    : calculatePieces(quantity, cost)
+            )
+        },
+        [unit]
+    )
 
     useWatchForm({ watch, callback: handleCallback })
 
-    const onChangeUnit = (value: string) => {
-        if (isWeight(value as Unit) !== isWeight(unit)) {
-            setTotal({
-                rounded: item.rounded,
-                costRounded: item.costRounded,
-                remainder: item.remainder
-            })
-            reset()
-        }
+    const onChangeUnit = useCallback(
+        (value: string) => {
+            if (isWeight(value as Unit) !== isWeight(unit)) {
+                setTotal({
+                    rounded: item.rounded,
+                    costRounded: item.costRounded,
+                    remainder: item.remainder
+                })
+                reset()
+            }
 
-        setUnit(value as Unit)
-    }
+            setUnit(value as Unit)
+        },
+        [item.costRounded, item.remainder, item.rounded, reset, unit]
+    )
 
-    const onChangeCurrency = (value: string) => {
+    const onChangeCurrency = useCallback((value: string) => {
         setCurrency(value as Currency)
-    }
+    }, [])
 
     useSaveProduct({
         itemId: Number(id),
@@ -128,4 +134,4 @@ export function ItemId({ id }: ItemIdProps) {
             />
         </FormProvider>
     )
-}
+})

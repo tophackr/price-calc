@@ -2,10 +2,12 @@
 
 import { isCloudStorageSupported } from '@telegram-apps/sdk-react'
 import { List } from '@telegram-apps/telegram-ui'
-import type { PropsWithChildren } from 'react'
+import { type PropsWithChildren, memo } from 'react'
 import { Header } from './header/Header'
 
-export function HomeLayout({ children }: PropsWithChildren) {
+export const HomeLayout = memo(function HomeLayout({
+    children
+}: PropsWithChildren) {
     return (
         <>
             {isCloudStorageSupported() && <Header />}
@@ -13,4 +15,4 @@ export function HomeLayout({ children }: PropsWithChildren) {
             <List>{children}</List>
         </>
     )
-}
+})

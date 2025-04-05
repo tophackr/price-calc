@@ -1,19 +1,19 @@
 import { openLink } from '@telegram-apps/sdk-react'
 import clsx from 'clsx'
 import { default as NextLink, type LinkProps as NextLinkProps } from 'next/link'
-import { type FC, type JSX, type MouseEventHandler, useCallback } from 'react'
+import { type JSX, type MouseEventHandler, memo, useCallback } from 'react'
 import styles from './Link.module.css'
 
 export interface LinkProps
     extends NextLinkProps,
         Omit<JSX.IntrinsicElements['a'], 'href'> {}
 
-export const Link: FC<LinkProps> = ({
+export const Link = memo(function Link({
     className,
     onClick: propsOnClick,
     href,
     ...rest
-}) => {
+}: LinkProps) {
     const onClick = useCallback<MouseEventHandler<HTMLAnchorElement>>(
         e => {
             propsOnClick?.(e)
@@ -50,4 +50,4 @@ export const Link: FC<LinkProps> = ({
             className={clsx(className, styles['link'])}
         />
     )
-}
+})

@@ -6,6 +6,7 @@ import {
     Title
 } from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
+import { memo } from 'react'
 import type { ICalculateCosts } from '@/shared/interfaces/calculate-cost.interface'
 import type { Measurement } from '@/shared/interfaces/measurement.interface'
 
@@ -13,7 +14,7 @@ interface PlaceholderBlockProps extends Measurement {
     total: ICalculateCosts
 }
 
-export function PlaceholderBlock({
+export const PlaceholderBlock = memo(function PlaceholderBlock({
     total: { remainder, costRounded, rounded },
     unit,
     currency
@@ -58,4 +59,4 @@ export function PlaceholderBlock({
             }
         />
     )
-}
+})

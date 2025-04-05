@@ -1,6 +1,7 @@
 import { Cell } from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
+import { memo, useCallback } from 'react'
 import { PAGES_URL } from '@/config/pages-url.config'
 import { formatCost } from '@/utils/string/format-cost'
 import type { ItemProps } from './Products.interface'
@@ -9,7 +10,7 @@ interface ProductsItemProps extends ItemProps {
     id: number
 }
 
-export function ProductsItem({
+export const ProductsItem = memo(function ProductsItem({
     id,
     item: {
         name,
@@ -26,9 +27,9 @@ export function ProductsItem({
 
     const router = useRouter()
 
-    const onItemClick = () => {
+    const onItemClick = useCallback(() => {
         router.push(PAGES_URL.itemId(id))
-    }
+    }, [id, router])
 
     return (
         <Cell
@@ -48,4 +49,4 @@ export function ProductsItem({
             {formatCost(cost.toFixed(2), currency, quantity, t(unit))}
         </Cell>
     )
-}
+})

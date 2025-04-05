@@ -1,15 +1,18 @@
 import { showPopup } from '@telegram-apps/sdk-react'
 import { ButtonCell } from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
+import { memo, useCallback } from 'react'
 
 interface ClearButtonProps {
     onClick: () => void
 }
 
-export function ClearButton({ onClick }: ClearButtonProps) {
+export const ClearButton = memo(function ClearButton({
+    onClick
+}: ClearButtonProps) {
     const t = useTranslations('Products.Clear')
 
-    const onButtonClick = () => {
+    const onButtonClick = useCallback(() => {
         showPopup({
             title: t('title'),
             message: t('description'),
@@ -22,7 +25,7 @@ export function ClearButton({ onClick }: ClearButtonProps) {
                 onClick()
             }
         })
-    }
+    }, [onClick, t])
 
     return (
         <ButtonCell
@@ -33,4 +36,4 @@ export function ClearButton({ onClick }: ClearButtonProps) {
             {t('button')}
         </ButtonCell>
     )
-}
+})

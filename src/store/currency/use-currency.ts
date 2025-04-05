@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { Currency } from '@/shared/enums/currency.enum'
 import { useActions } from '../hooks/use-actions'
 import { useAppSelector } from '../hooks/use-app-selector'
@@ -8,10 +9,13 @@ export function useCurrency() {
     const currency = useAppSelector(selectCurrency)
     const { setCurrency } = useActions()
 
-    const setCurrencyWithCloud = (currency: Currency) => {
-        setCurrency(currency)
-        setCurrencyCloud(currency)
-    }
+    const setCurrencyWithCloud = useCallback(
+        (currency: Currency) => {
+            setCurrency(currency)
+            setCurrencyCloud(currency)
+        },
+        [setCurrency]
+    )
 
     return { currency, setCurrency, setCurrencyWithCloud }
 }

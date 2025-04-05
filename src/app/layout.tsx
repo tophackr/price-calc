@@ -1,10 +1,10 @@
 import '@telegram-apps/telegram-ui/dist/styles.css'
 import type { Metadata, Viewport } from 'next'
 import 'normalize.css/normalize.css'
-import type { PropsWithChildren } from 'react'
-import { AppLayout } from '@/components/layout/app/App.layout'
 import { SITE_DESCRIPTION, SITE_NAME } from '@/constants/seo.constants'
 import '@/styles/globals.css'
+
+export { AppLayout as default } from '@/components/layout/app/App.layout'
 
 export const metadata: Metadata = {
     title: {
@@ -20,8 +20,4 @@ export const viewport: Viewport = {
         { media: '(prefers-color-scheme: dark)', color: 'black' }
     ],
     viewportFit: 'cover'
-}
-
-export default function Layout({ children }: PropsWithChildren) {
-    return <AppLayout>{children}</AppLayout>
 }

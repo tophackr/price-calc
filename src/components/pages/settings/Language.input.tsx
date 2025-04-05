@@ -3,10 +3,11 @@
 import { Section, Select } from '@telegram-apps/telegram-ui'
 import { Earth } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { useCallback } from 'react'
 import { localesMap } from '@/i18n/config'
 import type { Locale } from '@/i18n/types'
 import { useLocale } from '@/store/lang/use-locale'
-import { IconCell } from '../../shared/cells/icon-cell/IconCell'
+import { IconCell } from '../../shared/icon-cell/IconCell'
 import { Link } from '../../shared/link/Link'
 
 export function LanguageInput() {
@@ -14,9 +15,12 @@ export function LanguageInput() {
 
     const { locale, setLocaleWithCloud } = useLocale()
 
-    const onChange = (value: string) => {
-        setLocaleWithCloud(value as Locale)
-    }
+    const onChange = useCallback(
+        (value: string) => {
+            setLocaleWithCloud(value as Locale)
+        },
+        [setLocaleWithCloud]
+    )
 
     return (
         <Section

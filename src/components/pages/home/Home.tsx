@@ -1,7 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
-import { useState } from 'react'
+import { useCallback, useState } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import type { Currency } from '@/shared/enums/currency.enum'
 import type { Unit } from '@/shared/enums/unit.enum'
@@ -44,32 +44,38 @@ export function Home() {
         mode: 'onChange'
     })
 
-    const onWatchCallback = ({ quantity, cost }: ItemForm) => {
-        if (!quantity || !cost) {
-            return
-        }
+    const onWatchCallback = useCallback(
+        ({ quantity, cost }: ItemForm) => {
+            if (!quantity || !cost) {
+                return
+            }
 
-        setTotal(
-            isWeight(unit)
-                ? calculateWeight(quantity, cost)
-                : calculatePieces(quantity, cost)
-        )
-    }
+            setTotal(
+                isWeight(unit)
+                    ? calculateWeight(quantity, cost)
+                    : calculatePieces(quantity, cost)
+            )
+        },
+        [unit]
+    )
 
     useWatchForm({ watch, callback: onWatchCallback })
 
-    const onChangeUnit = (value: string) => {
-        if (isWeight(value as Unit) !== isWeight(unit)) {
-            setTotal(initialState)
-            reset()
-        }
+    const onChangeUnit = useCallback(
+        (value: string) => {
+            if (isWeight(value as Unit) !== isWeight(unit)) {
+                setTotal(initialState)
+                reset()
+            }
 
-        setUnit(value as Unit)
-    }
+            setUnit(value as Unit)
+        },
+        [reset, unit]
+    )
 
-    const onChangeCurrency = (value: string) => {
+    const onChangeCurrency = useCallback((value: string) => {
         setCurrency(value as Currency)
-    }
+    }, [])
 
     return (
         <FormProvider

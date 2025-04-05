@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import type { Unit } from '@/shared/enums/unit.enum'
 import { useActions } from '../hooks/use-actions'
 import { useAppSelector } from '../hooks/use-app-selector'
@@ -8,10 +9,13 @@ export function useUnit() {
     const unit = useAppSelector(selectUnit)
     const { setUnit } = useActions()
 
-    const setUnitWithCloud = (unit: Unit) => {
-        setUnit(unit)
-        setUnitCloud(unit)
-    }
+    const setUnitWithCloud = useCallback(
+        (unit: Unit) => {
+            setUnit(unit)
+            setUnitCloud(unit)
+        },
+        [setUnit]
+    )
 
     return { unit, setUnit, setUnitWithCloud }
 }

@@ -1,7 +1,7 @@
 import { Input, Section } from '@telegram-apps/telegram-ui'
 import { Sigma } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { IconCell } from '../../shared/cells/icon-cell/IconCell'
+import { IconCell } from '../../shared/icon-cell/IconCell'
 
 export function CostSkeleton() {
     const t = useTranslations('Home.cost')

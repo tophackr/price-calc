@@ -1,14 +1,16 @@
 'use client'
 
 import { NextIntlClientProvider } from 'next-intl'
-import { type PropsWithChildren, useEffect, useState } from 'react'
+import { type PropsWithChildren, memo, useEffect, useState } from 'react'
 import { Loader } from '@/components/ui/Loader'
-import { useLocale } from '@/store/lang/use-locale'
 import { defaultTimeZone } from '@/i18n/config'
 import { getLocales } from '@/i18n/get-locales'
 import type { Translation } from '@/i18n/types'
+import { useLocale } from '@/store/lang/use-locale'
 
-export function ClientI18nProvider({ children }: PropsWithChildren) {
+export const ClientI18nProvider = memo(function ClientI18nProvider({
+    children
+}: PropsWithChildren) {
     const { locale } = useLocale()
 
     const [messages, setMessages] = useState<Translation | null>(null)
@@ -40,4 +42,4 @@ export function ClientI18nProvider({ children }: PropsWithChildren) {
             {children}
         </NextIntlClientProvider>
     )
-}
+})

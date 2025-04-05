@@ -1,6 +1,7 @@
 'use client'
 
 import dynamic from 'next/dynamic'
+import { useCallback } from 'react'
 import type { Currency } from '@/shared/enums/currency.enum'
 import type { Unit } from '@/shared/enums/unit.enum'
 import { useCurrency } from '@/store/currency/use-currency'
@@ -33,13 +34,19 @@ export function Settings() {
     const { unit, setUnitWithCloud } = useUnit()
     const { currency, setCurrencyWithCloud } = useCurrency()
 
-    const onChangeUnit = (value: string) => {
-        setUnitWithCloud(value as Unit)
-    }
+    const onChangeUnit = useCallback(
+        (value: string) => {
+            setUnitWithCloud(value as Unit)
+        },
+        [setUnitWithCloud]
+    )
 
-    const onChangeCurrency = (value: string) => {
-        setCurrencyWithCloud(value as Currency)
-    }
+    const onChangeCurrency = useCallback(
+        (value: string) => {
+            setCurrencyWithCloud(value as Currency)
+        },
+        [setCurrencyWithCloud]
+    )
 
     return (
         <>

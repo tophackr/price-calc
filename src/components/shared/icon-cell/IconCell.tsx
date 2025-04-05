@@ -1,7 +1,12 @@
 'use client'
 
 import clsx from 'clsx'
-import { type CSSProperties, type ReactElement, cloneElement } from 'react'
+import {
+    type CSSProperties,
+    type ReactElement,
+    cloneElement,
+    memo
+} from 'react'
 import { useIsAppleClient } from '@/hooks/use-is-apple-client'
 import styles from './IconCell.module.css'
 
@@ -11,7 +16,10 @@ export interface IconCellProps {
     bgColor: CSSProperties['backgroundColor']
 }
 
-export function IconCell({ Icon, bgColor }: IconCellProps) {
+export const IconCell = memo(function IconCell({
+    Icon,
+    bgColor
+}: IconCellProps) {
     const isApple = useIsAppleClient()
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,4 +35,4 @@ export function IconCell({ Icon, bgColor }: IconCellProps) {
               }
             : {}
     })
-}
+})

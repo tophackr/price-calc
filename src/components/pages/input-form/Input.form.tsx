@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic'
+import { memo } from 'react'
 import type { ICalculateCosts } from '@/shared/interfaces/calculate-cost.interface'
 import { isWeight } from '@/utils/boolean/is-weight'
 import type { SelectProps } from '../select-form/Select.interface'
@@ -40,7 +41,7 @@ const DynamicSelect = dynamic(
     }
 )
 
-export function InputForm({
+export const InputForm = memo(function InputForm({
     total,
     unit,
     onChangeUnit,
@@ -67,4 +68,4 @@ export function InputForm({
             />
         </>
     )
-}
+})

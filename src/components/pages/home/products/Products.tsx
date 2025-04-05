@@ -1,5 +1,6 @@
 import { Section } from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
+import { memo, useCallback, useMemo } from 'react'
 import { defaultMaxProducts } from '@/constants/default.constants'
 import { useProducts } from '@/store/products/use-products'
 import { ClearButton } from './ClearButton'
@@ -7,14 +8,14 @@ import type { ItemProps } from './Products.interface'
 import { ProductsItem } from './ProductsItem'
 import { useSaveProducts } from './use-save-products'
 
-export function Products({ item }: ItemProps) {
+export const Products = memo(function Products({ item }: ItemProps) {
     const t = useTranslations('Products')
 
     const { products, setProductsWithCloud } = useProducts()
 
-    const onClearClick = () => {
+    const onClick = useCallback(() => {
         setProductsWithCloud([])
-    }
+    }, [setProductsWithCloud])
 
     useSaveProducts({
         item,
@@ -22,7 +23,10 @@ export function Products({ item }: ItemProps) {
         setProducts: setProductsWithCloud
     })
 
-    const productsValues = Object.values(products).reverse()
+    const productsValues = useMemo(
+        () => Object.values(products).reverse(),
+        [products]
+    )
 
     return (
         !!productsValues.length && (
@@ -44,8 +48,8 @@ export function Products({ item }: ItemProps) {
                     />
                 ))}
 
-                <ClearButton onClick={onClearClick} />
+                <ClearButton onClick={onClick} />
             </Section>
         )
     )
-}
+})

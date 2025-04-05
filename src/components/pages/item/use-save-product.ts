@@ -43,5 +43,5 @@ export function useSaveProduct({
         }
     }, [initData, item])
 
-    useMainButton({ text: t('button'), onClick: onClick })
+    useMainButton({ text: t('button'), onClick })
 }

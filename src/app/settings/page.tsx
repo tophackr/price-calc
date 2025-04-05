@@ -1,5 +1,1 @@
-import { Settings } from '@/components/pages/settings/Settings'
-
-export default function SettingsPage() {
-    return <Settings />
-}
+export { Settings as default } from '@/components/pages/settings/Settings'

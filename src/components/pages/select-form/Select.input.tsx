@@ -1,12 +1,13 @@
 import { Section, Select } from '@telegram-apps/telegram-ui'
 import { Banknote, Group } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { IconCell } from '@/components/shared/cells/icon-cell/IconCell'
+import { memo } from 'react'
+import { IconCell } from '@/components/shared/icon-cell/IconCell'
 import { Currency } from '@/shared/enums/currency.enum'
 import { Unit } from '@/shared/enums/unit.enum'
 import type { SelectProps } from './Select.interface'
 
-export function SelectInput({
+export const SelectInput = memo(function SelectInput({
     unit,
     onChangeUnit,
     currency,
@@ -59,4 +60,4 @@ export function SelectInput({
             </Select>
         </Section>
     )
-}
+})

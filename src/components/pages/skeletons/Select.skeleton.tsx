@@ -1,7 +1,7 @@
 import { Section, Select } from '@telegram-apps/telegram-ui'
 import { Banknote, Group } from 'lucide-react'
 import { useTranslations } from 'next-intl'
-import { IconCell } from '../../shared/cells/icon-cell/IconCell'
+import { IconCell } from '../../shared/icon-cell/IconCell'
 
 export function SelectSkeleton() {
     const t = useTranslations('Home')

@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { useActions } from '../hooks/use-actions'
 import { useAppSelector } from '../hooks/use-app-selector'
 import { setProducts as setProductsCloud } from './products'
@@ -8,10 +9,13 @@ export function useProducts() {
     const products = useAppSelector(selectProducts)
     const { setProducts } = useActions()
 
-    const setProductsWithCloud = (products: IProduct[]) => {
-        setProducts(products)
-        setProductsCloud(products)
-    }
+    const setProductsWithCloud = useCallback(
+        (products: IProduct[]) => {
+            setProducts(products)
+            setProductsCloud(products)
+        },
+        [setProducts]
+    )
 
     return {
         products,
