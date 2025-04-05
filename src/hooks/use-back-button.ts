@@ -1,27 +1,33 @@
 'use client'
 
-import { backButton } from '@telegram-apps/sdk-react'
+import {
+    hideBackButton,
+    onBackButtonClick,
+    showBackButton
+} from '@telegram-apps/sdk-react'
 import { useRouter } from 'next/navigation'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 
 export function useBackButton() {
     const router = useRouter()
 
+    const onClick = useCallback(() => {
+        router.back()
+    }, [router])
+
     useEffect(() => {
-        backButton.show()
+        showBackButton()
 
         return () => {
-            backButton.hide()
+            hideBackButton()
         }
     }, [])
 
     useEffect(() => {
-        const offClick = backButton.onClick(() => {
-            router.back()
-        })
+        const offClick = onBackButtonClick(onClick)
 
         return () => {
             offClick()
         }
-    }, [router])
+    }, [onClick])
 }

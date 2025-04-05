@@ -1,52 +1,45 @@
 'use client'
 
-import {
-    miniApp,
-    postEvent,
-    retrieveLaunchParams,
-    useSignal
-} from '@telegram-apps/sdk-react'
+import { isMiniAppDark, useSignal } from '@telegram-apps/sdk-react'
 import { AppRoot } from '@telegram-apps/telegram-ui'
-import { type PropsWithChildren, useEffect } from 'react'
+import { type PropsWithChildren } from 'react'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { ErrorPage } from '@/components/ErrorPage'
 import { Loader } from '@/components/ui/Loader'
 import { init } from '@/core/init'
-import { mockEnv } from '@/core/mockEnv'
+import { mockEnv } from '@/core/mocks/mockEnv'
 import { useInitStore } from '@/store/hooks/use-init-store'
 import { useClientOnce } from '@/hooks/use-client-once'
 import { useDidMount } from '@/hooks/use-did-mount'
 import { useIsAppleClient } from '@/hooks/use-is-apple-client'
+import { useLaunchParams } from '@/hooks/use-launch-params'
 
 function RootInner({ children }: PropsWithChildren) {
     const isDev = process.env.NODE_ENV === 'development'
 
     // Mock Telegram environment in development mode if needed.
-    /* if (isDev) {
-        // eslint-disable-next-line react-hooks/rules-of-hooks
-        useTelegramMock()
-    } */
     useClientOnce(() => {
         mockEnv(isDev)
     })
 
-    const lp = retrieveLaunchParams()
+    const lp = useLaunchParams()
     const isApple = useIsAppleClient(lp)
-    const debug = isDev || lp.tgWebAppStartParam === 'debug'
+
+    const { tgWebAppPlatform: platform } = lp
+    const debug = isDev || (lp.tgWebAppStartParam || '').includes('debug')
 
     // Initialize the library.
     useClientOnce(() => {
-        init(debug)
+        init({
+            debug,
+            eruda: debug && ['ios', 'android'].includes(platform),
+            mockForMacOS: platform === 'macos'
+        })
     })
 
-    const isDark = useSignal(miniApp.isDark)
+    const isDark = useSignal(isMiniAppDark)
 
     useInitStore()
-
-    // TODO: temp fix for ios
-    useEffect(() => {
-        postEvent('web_app_request_theme')
-    }, [])
 
     return (
         <AppRoot

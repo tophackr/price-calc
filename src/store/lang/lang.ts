@@ -1,19 +1,23 @@
-import { cloudStorage } from '@telegram-apps/sdk-react'
+import {
+    getCloudStorageItem,
+    isCloudStorageSupported,
+    setCloudStorageItem
+} from '@telegram-apps/sdk-react'
 import { defaultLocale } from '@/i18n/config'
 import type { Locale } from '@/i18n/types'
 
 const LANG_NAME = 'TG_LOCALE'
 
 export async function getLocale(): Promise<Locale> {
-    if (!cloudStorage.isSupported()) return defaultLocale
+    if (!isCloudStorageSupported()) return defaultLocale
 
-    const locale = await cloudStorage.getItem(LANG_NAME)
+    const locale = await getCloudStorageItem(LANG_NAME)
 
     return (locale || defaultLocale) as Locale
 }
 
 export async function setLocale(unit?: Locale) {
-    if (cloudStorage.isSupported()) {
-        await cloudStorage.setItem(LANG_NAME, unit || defaultLocale)
+    if (isCloudStorageSupported()) {
+        await setCloudStorageItem(LANG_NAME, unit || defaultLocale)
     }
 }

@@ -1,6 +1,9 @@
-import { mainButton } from '@telegram-apps/sdk-react'
+import {
+    isMainButtonVisible,
+    setMainButtonParams
+} from '@telegram-apps/sdk-react'
 import { useTranslations } from 'next-intl'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import type { IProduct } from '@/store/products/products.types'
 import { useMainButton } from '@/hooks/use-main-button'
 import { isEqualWithoutUndefined } from '@/utils/is-equal'
@@ -22,23 +25,23 @@ export function useSaveProduct({
 }: UseSaveProductProps) {
     const t = useTranslations('Products')
 
-    const handleSave = () => {
+    const onClick = useCallback(() => {
         const data = structuredClone(products)
 
         data[itemId] = initData
 
         setProducts(data)
-    }
+    }, [initData, itemId, products, setProducts])
 
     useEffect(() => {
         const toVisible = !isEqualWithoutUndefined(initData, item)
 
-        if (!mainButton.isVisible() && toVisible) {
-            mainButton.setParams({ isVisible: true })
-        } else if (mainButton.isVisible() && !toVisible) {
-            mainButton.setParams({ isVisible: false })
+        if (!isMainButtonVisible() && toVisible) {
+            setMainButtonParams({ isVisible: true })
+        } else if (isMainButtonVisible() && !toVisible) {
+            setMainButtonParams({ isVisible: false })
         }
     }, [initData, item])
 
-    useMainButton({ text: t('button'), onClick: handleSave })
+    useMainButton({ text: t('button'), onClick: onClick })
 }

@@ -1,89 +1,68 @@
 import {
-    backButton,
-    initData,
+    bindThemeParamsCssVars,
+    bindViewportCssVars,
     init as initSDK,
-    isConcurrentCallError,
-    isFunctionNotAvailableError,
-    mainButton,
-    miniApp,
+    isThemeParamsCssVarsBound,
+    isViewportCssVarsBound,
+    miniAppReady,
+    mountBackButton,
+    mountMainButton,
+    mountMiniAppSync,
+    mountSettingsButton,
+    mountViewport,
+    restoreInitData,
     setDebug,
-    settingsButton,
-    targetOrigin,
-    themeParams,
-    viewport
+    targetOrigin
 } from '@telegram-apps/sdk-react'
+import { mockMacOs } from './mocks/mockMacOs'
+
+interface InitProps {
+    debug: boolean
+    eruda: boolean
+    mockForMacOS: boolean
+}
 
 /**
  * Initializes the application and configures its dependencies.
  */
-export function init(debug: boolean): void {
+export function init({ debug, eruda, mockForMacOS }: InitProps): void {
     // Set @telegram-apps/sdk-react debug mode.
     setDebug(debug)
-    targetOrigin.set('https://platformer-hq.github.io')
+    targetOrigin.set('https://tgl.mini-apps.store')
 
     // Initialize special event handlers for Telegram Desktop, Android, iOS, etc.
     // Also, configure the package.
     initSDK()
-
-    // Mount all components used in the project.
-    if (backButton.isSupported()) backButton.mount()
-    if (!mainButton.setParams.isAvailable()) mainButton.mount()
-    if (settingsButton.mount.isAvailable()) {
-        settingsButton.mount()
-    }
-
-    if (!miniApp.isMounted()) {
-        miniApp
-            .mount()
-            .catch(error => {
-                if (!isConcurrentCallError(error)) throw error
-            })
-            .then(() => {
-                if (!miniApp.isCssVarsBound()) miniApp.bindCssVars()
-            })
-            .catch(error => {
-                if (!isFunctionNotAvailableError(error)) throw error
-            })
-    }
-    if (!themeParams.isMounted()) {
-        themeParams
-            .mount()
-            .catch(error => {
-                if (!isConcurrentCallError(error)) throw error
-            })
-            .then(() => {
-                if (!themeParams.isCssVarsBound()) themeParams.bindCssVars()
-            })
-            .catch(error => {
-                if (!isFunctionNotAvailableError(error)) throw error
-            })
-    }
-
-    initData.restore()
-
-    if (!viewport.isMounted()) {
-        void viewport
-            .mount()
-            .catch(error => {
-                if (!isConcurrentCallError(error)) throw error
-            })
-            .then(() => {
-                if (!viewport.isCssVarsBound()) viewport.bindCssVars()
-            })
-            .catch(error => {
-                if (!isFunctionNotAvailableError(error)) {
-                    console.error(
-                        'Something went wrong mounting the viewport',
-                        error
-                    )
-                }
-            })
-    }
-
-    miniApp.ready()
+    miniAppReady()
 
     // Add Eruda if needed.
-    if (debug) {
-        import('eruda').then(lib => lib.default.init()).catch(console.error)
+    if (eruda) {
+        void import('eruda').then(({ default: lib }) => {
+            lib.init()
+            lib.position({ x: window.innerWidth - 50, y: 0 })
+        })
+    }
+
+    // Telegram for macOS has a ton of bugs, including cases, when the client doesn't
+    // even response to the "web_app_request_theme" method. It also generates an incorrect
+    // event for the "web_app_request_safe_area" method.
+    if (mockForMacOS) mockMacOs()
+
+    // Mount all components used in the project.
+    mountBackButton.ifAvailable()
+    mountMainButton.ifAvailable()
+    mountSettingsButton.ifAvailable()
+
+    restoreInitData()
+
+    if (mountMiniAppSync.isAvailable()) {
+        mountMiniAppSync()
+        if (!isThemeParamsCssVarsBound()) bindThemeParamsCssVars()
+    }
+
+    if (mountViewport.isAvailable()) {
+        mountViewport().then(() => {
+            if (!isViewportCssVarsBound()) bindViewportCssVars()
+        })
     }
 }

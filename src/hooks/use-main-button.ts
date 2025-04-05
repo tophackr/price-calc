@@ -1,4 +1,9 @@
-import { type RGB, mainButton } from '@telegram-apps/sdk-react'
+import {
+    type RGB,
+    isMainButtonVisible,
+    onMainButtonClick,
+    setMainButtonParams
+} from '@telegram-apps/sdk-react'
 import { useEffect } from 'react'
 
 interface State {
@@ -16,18 +21,18 @@ export function useMainButton(updates: Partial<State>) {
     const { onClick, ...nUpdates } = updates
 
     useEffect(() => {
-        mainButton.setParams(nUpdates)
+        setMainButtonParams(nUpdates)
 
         return () => {
-            if (mainButton.isVisible()) {
-                mainButton.setParams({ isVisible: false })
+            if (isMainButtonVisible()) {
+                setMainButtonParams({ isVisible: false })
             }
         }
     }, [nUpdates])
 
     useEffect(() => {
         if (onClick) {
-            const offClick = mainButton.onClick(onClick)
+            const offClick = onMainButtonClick(onClick)
 
             return () => {
                 offClick()

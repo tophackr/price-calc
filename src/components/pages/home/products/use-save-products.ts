@@ -1,7 +1,10 @@
-import { mainButton } from '@telegram-apps/sdk-react'
+import {
+    isMainButtonVisible,
+    setMainButtonParams
+} from '@telegram-apps/sdk-react'
 import debounce from 'lodash.debounce'
 import { useTranslations } from 'next-intl'
-import { useEffect } from 'react'
+import { useCallback, useEffect } from 'react'
 import { defaultMaxProducts } from '@/constants/default.constants'
 import { useAutoSaveItems } from '@/store/auto-save-items/use-auto-save-items'
 import type { IProduct } from '@/store/products/products.types'
@@ -22,7 +25,7 @@ export function useSaveProducts({
 
     const { autoSaveItems } = useAutoSaveItems()
 
-    const handleSave = () => {
+    const onClick = useCallback(() => {
         const data = [...structuredClone(products), item]
 
         if (data.length > defaultMaxProducts) {
@@ -30,8 +33,8 @@ export function useSaveProducts({
         }
 
         setProducts(data)
-        mainButton.setParams({ isVisible: false })
-    }
+        setMainButtonParams({ isVisible: false })
+    }, [item, products, setProducts])
 
     useEffect(() => {
         const toVisible = !!(item.cost && item.quantity)
@@ -39,21 +42,20 @@ export function useSaveProducts({
         if (autoSaveItems) {
             if (toVisible) {
                 debounce(() => {
-                    handleSave()
+                    onClick()
                 }, 2000)()
             }
         } else {
-            if (!mainButton.isVisible() && toVisible) {
-                mainButton.setParams({ isVisible: true })
-            } else if (mainButton.isVisible() && !toVisible) {
-                mainButton.setParams({ isVisible: false })
+            if (!isMainButtonVisible() && toVisible) {
+                setMainButtonParams({ isVisible: true })
+            } else if (isMainButtonVisible() && !toVisible) {
+                setMainButtonParams({ isVisible: false })
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [autoSaveItems, item.cost, item.quantity])
+    }, [autoSaveItems, item.cost, item.quantity, onClick])
 
     useMainButton({
         text: t('button'),
-        onClick: handleSave
+        onClick
     })
 }
