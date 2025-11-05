@@ -1,6 +1,6 @@
-import { Link, Section, Select } from '@telegram-apps/telegram-ui'
 import { Earth } from 'lucide-react'
 import { useTranslations } from 'next-intl'
+import { Link, Section, Select } from 'tmaui'
 import { IconCell } from '../../shared/icon-cell/IconCell'
 
 export function LanguageSkeleton() {

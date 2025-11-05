@@ -1,6 +1,6 @@
-import { Section } from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
 import { memo, useCallback, useMemo } from 'react'
+import { Section } from 'tmaui'
 import { defaultMaxProducts } from '@/constants/default.constants'
 import { useProducts } from '@/store/products/use-products'
 import { ClearButton } from './ClearButton'

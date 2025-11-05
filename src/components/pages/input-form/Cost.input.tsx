@@ -1,7 +1,7 @@
-import { Input, Section } from '@telegram-apps/telegram-ui'
 import { Sigma } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useFormContext } from 'react-hook-form'
+import { Input, Section } from 'tmaui'
 import type { ItemForm } from '@/shared/interfaces/item.interface'
 import { IconCell } from '../../shared/icon-cell/IconCell'
 

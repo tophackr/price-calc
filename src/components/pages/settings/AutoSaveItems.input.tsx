@@ -1,6 +1,6 @@
-import { Cell, Section, Switch } from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
 import { useCallback } from 'react'
+import { Cell, Section, Switch } from 'tmaui'
 import { useAutoSaveItems } from '@/store/auto-save-items/use-auto-save-items'
 
 export function AutoSaveItemsInput() {

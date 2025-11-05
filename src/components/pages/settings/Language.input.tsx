@@ -1,9 +1,9 @@
 'use client'
 
-import { Section, Select } from '@telegram-apps/telegram-ui'
 import { Earth } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useCallback } from 'react'
+import { Section, Select } from 'tmaui'
 import { localesMap } from '@/i18n/config'
 import type { Locale } from '@/i18n/types'
 import { useLocale } from '@/store/lang/use-locale'

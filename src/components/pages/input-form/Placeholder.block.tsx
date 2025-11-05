@@ -1,12 +1,6 @@
-import {
-    Headline,
-    LargeTitle,
-    Placeholder,
-    Subheadline,
-    Title
-} from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
 import { memo } from 'react'
+import { Headline, LargeTitle, Placeholder, Subheadline, Title } from 'tmaui'
 import type { ICalculateCosts } from '@/shared/interfaces/calculate-cost.interface'
 import type { Measurement } from '@/shared/interfaces/measurement.interface'
 

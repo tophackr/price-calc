@@ -7,7 +7,7 @@ import {
     cloneElement,
     memo
 } from 'react'
-import { useIsAppleClient } from '@/hooks/use-is-apple-client'
+import { useIsApplePlatform } from '@/hooks/use-is-apple-platform'
 import styles from './IconCell.module.css'
 
 export interface IconCellProps {
@@ -20,7 +20,7 @@ export const IconCell = memo(function IconCell({
     Icon,
     bgColor
 }: IconCellProps) {
-    const isApple = useIsAppleClient()
+    const isApple = useIsApplePlatform()
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return cloneElement(Icon as ReactElement<any>, {

@@ -1,7 +1,7 @@
-import { Section, Select } from '@telegram-apps/telegram-ui'
 import { Banknote, Group } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { memo } from 'react'
+import { Section, Select } from 'tmaui'
 import { IconCell } from '@/components/shared/icon-cell/IconCell'
 import { Currency } from '@/shared/enums/currency.enum'
 import { Unit } from '@/shared/enums/unit.enum'

@@ -1,7 +1,7 @@
-import { Input, Section } from '@telegram-apps/telegram-ui'
 import { TextCursorInput } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { useFormContext } from 'react-hook-form'
+import { Input, Section } from 'tmaui'
 import { IconCell } from '@/components/shared/icon-cell/IconCell'
 import type { IProduct } from '@/store/products/products.types'
 

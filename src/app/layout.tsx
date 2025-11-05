@@ -1,6 +1,6 @@
-import '@telegram-apps/telegram-ui/dist/styles.css'
 import type { Metadata, Viewport } from 'next'
 import 'normalize.css/normalize.css'
+import 'tmaui/tmaui.css'
 import { SITE_DESCRIPTION, SITE_NAME } from '@/constants/seo.constants'
 import '@/styles/globals.css'
 

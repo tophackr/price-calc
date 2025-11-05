@@ -1,7 +1,7 @@
-import { Placeholder } from '@telegram-apps/telegram-ui'
 import { SpeedInsights } from '@vercel/speed-insights/next'
 import { useLocale } from 'next-intl'
 import { type PropsWithChildren } from 'react'
+import { Placeholder } from 'tmaui'
 import { HeadProvider } from '@/providers/HeadProvider'
 
 export function AppLayout({ children }: PropsWithChildren) {

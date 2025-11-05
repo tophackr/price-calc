@@ -1,4 +1,4 @@
-import { openLink } from '@telegram-apps/sdk-react'
+import { openLink } from '@tma.js/sdk-react'
 import clsx from 'clsx'
 import { default as NextLink, type LinkProps as NextLinkProps } from 'next/link'
 import { type JSX, type MouseEventHandler, memo, useCallback } from 'react'

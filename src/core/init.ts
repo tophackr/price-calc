@@ -1,68 +1,81 @@
 import {
-    bindThemeParamsCssVars,
-    bindViewportCssVars,
+    applyPolyfills,
+    backButton,
+    initData,
     init as initSDK,
-    isThemeParamsCssVarsBound,
-    isViewportCssVarsBound,
-    miniAppReady,
-    mountBackButton,
-    mountMainButton,
-    mountMiniAppSync,
-    mountSettingsButton,
-    mountViewport,
-    restoreInitData,
+    mainButton,
+    miniApp,
+    secondaryButton,
     setDebug,
-    targetOrigin
-} from '@telegram-apps/sdk-react'
-import { mockMacOs } from './mocks/mockMacOs'
+    setTargetOrigin,
+    settingsButton,
+    themeParams,
+    viewport
+} from '@tma.js/sdk-react'
+import { mockPlatform } from './mocks/mockPlatform'
 
 interface InitProps {
     debug: boolean
     eruda: boolean
     mockForMacOS: boolean
+    mockForWebK: boolean
 }
 
 /**
  * Initializes the application and configures its dependencies.
  */
-export function init({ debug, eruda, mockForMacOS }: InitProps): void {
-    // Set @telegram-apps/sdk-react debug mode.
+export async function init({
+    debug,
+    eruda,
+    mockForMacOS,
+    mockForWebK
+}: InitProps): Promise<void> {
+    applyPolyfills()
+    // Set @tma.js/sdk-react debug mode.
     setDebug(debug)
-    targetOrigin.set('https://tgl.mini-apps.store')
+    setTargetOrigin('https://tgl.mini-apps.store')
 
     // Initialize special event handlers for Telegram Desktop, Android, iOS, etc.
     // Also, configure the package.
     initSDK()
-    miniAppReady()
+    miniApp.ready()
 
     // Add Eruda if needed.
     if (eruda) {
         void import('eruda').then(({ default: lib }) => {
             lib.init()
-            lib.position({ x: window.innerWidth - 50, y: 0 })
+            lib.position({
+                x: window.innerWidth - 50,
+                y: window.innerHeight - 100
+            })
         })
     }
 
     // Telegram for macOS has a ton of bugs, including cases, when the client doesn't
     // even response to the "web_app_request_theme" method. It also generates an incorrect
     // event for the "web_app_request_safe_area" method.
-    if (mockForMacOS) mockMacOs()
+    if (mockForMacOS || mockForWebK)
+        mockPlatform({ macOs: mockForMacOS, webK: mockForWebK })
+
+    // Initialize required components.
+    initData.restore()
 
     // Mount all components used in the project.
-    mountBackButton.ifAvailable()
-    mountMainButton.ifAvailable()
-    mountSettingsButton.ifAvailable()
+    await (viewport.mount.isAvailable() &&
+        viewport.mount({ timeout: 3000 }).then(() => {
+            viewport.expand()
+            viewport.bindCssVars()
+        }))
 
-    restoreInitData()
-
-    if (mountMiniAppSync.isAvailable()) {
-        mountMiniAppSync()
-        if (!isThemeParamsCssVarsBound()) bindThemeParamsCssVars()
+    if (themeParams.mount.isAvailable()) {
+        themeParams.mount()
+        if (!themeParams.isCssVarsBound()) themeParams.bindCssVars()
     }
 
-    if (mountViewport.isAvailable()) {
-        mountViewport().then(() => {
-            if (!isViewportCssVarsBound()) bindViewportCssVars()
-        })
-    }
+    mainButton.mount.ifAvailable()
+    secondaryButton.mount.ifAvailable()
+    backButton.mount.ifAvailable()
+    settingsButton.mount.ifAvailable()
+
+    miniApp.mount.ifAvailable()
 }

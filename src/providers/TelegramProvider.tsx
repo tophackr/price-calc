@@ -1,8 +1,8 @@
 'use client'
 
-import { isMiniAppDark, useSignal } from '@telegram-apps/sdk-react'
-import { AppRoot } from '@telegram-apps/telegram-ui'
+import { miniApp, useLaunchParams, useSignal } from '@tma.js/sdk-react'
 import { type PropsWithChildren, memo } from 'react'
+import { AppRoot } from 'tmaui'
 import { ErrorBoundary } from '@/components/ErrorBoundary'
 import { ErrorPage } from '@/components/ErrorPage'
 import { Loader } from '@/components/ui/Loader'
@@ -11,8 +11,7 @@ import { mockEnv } from '@/core/mocks/mockEnv'
 import { useInitStore } from '@/store/hooks/use-init-store'
 import { useClientOnce } from '@/hooks/use-client-once'
 import { useDidMount } from '@/hooks/use-did-mount'
-import { useIsAppleClient } from '@/hooks/use-is-apple-client'
-import { useLaunchParams } from '@/hooks/use-launch-params'
+import { useIsApplePlatform } from '@/hooks/use-is-apple-platform'
 
 const RootInner = memo(function RootInner({ children }: PropsWithChildren) {
     const isDev = process.env.NODE_ENV === 'development'
@@ -23,7 +22,7 @@ const RootInner = memo(function RootInner({ children }: PropsWithChildren) {
     })
 
     const lp = useLaunchParams()
-    const isApple = useIsAppleClient(lp)
+    const isApple = useIsApplePlatform()
 
     const { tgWebAppPlatform: platform } = lp
     const debug = isDev || (lp.tgWebAppStartParam || '').includes('debug')
@@ -33,11 +32,12 @@ const RootInner = memo(function RootInner({ children }: PropsWithChildren) {
         init({
             debug,
             eruda: debug && ['ios', 'android'].includes(platform),
-            mockForMacOS: platform === 'macos'
+            mockForMacOS: platform === 'macos',
+            mockForWebK: platform === 'webk'
         })
     })
 
-    const isDark = useSignal(isMiniAppDark)
+    const isDark = useSignal(miniApp.isDark)
 
     useInitStore()
 

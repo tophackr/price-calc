@@ -1,9 +1,9 @@
 'use client'
 
 import DuckNotFound from '@public/lottie/Duck-NotFound.json'
-import { List, Placeholder } from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
 import dynamic from 'next/dynamic'
+import { List, Placeholder } from 'tmaui'
 import { useBackButton } from '@/hooks/use-back-button'
 import { NotFoundButton } from './NotFoundButton'
 

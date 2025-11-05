@@ -1,7 +1,7 @@
-import { showPopup } from '@telegram-apps/sdk-react'
-import { ButtonCell } from '@telegram-apps/telegram-ui'
+import { popup } from '@tma.js/sdk-react'
 import { useTranslations } from 'next-intl'
 import { memo, useCallback } from 'react'
+import { ButtonCell } from 'tmaui'
 
 interface ClearButtonProps {
     onClick: () => void
@@ -13,18 +13,20 @@ export const ClearButton = memo(function ClearButton({
     const t = useTranslations('Products.Clear')
 
     const onButtonClick = useCallback(() => {
-        showPopup({
-            title: t('title'),
-            message: t('description'),
-            buttons: [
-                { id: 'cancel', type: 'cancel' },
-                { id: 'ok', type: 'ok' }
-            ]
-        }).then(buttonId => {
-            if (buttonId === 'ok') {
-                onClick()
-            }
-        })
+        popup
+            .show({
+                title: t('title'),
+                message: t('description'),
+                buttons: [
+                    { id: 'cancel', type: 'cancel' },
+                    { id: 'ok', type: 'ok' }
+                ]
+            })
+            .then(buttonId => {
+                if (buttonId === 'ok') {
+                    onClick()
+                }
+            })
     }, [onClick, t])
 
     return (

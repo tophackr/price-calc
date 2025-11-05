@@ -1,9 +1,9 @@
-import { ButtonCell, Section } from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { memo, useCallback } from 'react'
+import { ButtonCell, Section } from 'tmaui'
 import type { ItemIdProps } from '@/shared/interfaces/item.interface'
-import { PAGES_URL } from '@/config/pages-url.config'
+import { pagesUrl } from '@/config/pages-url.config'
 import type { IProduct } from '@/store/products/products.types'
 
 interface DeleteButtonProps extends ItemIdProps {
@@ -27,7 +27,7 @@ export const DeleteButton = memo(function DeleteButton({
 
         setProducts(data)
 
-        router.push(PAGES_URL.HOME)
+        router.push(pagesUrl.home)
     }, [id, products, router, setProducts])
 
     return (

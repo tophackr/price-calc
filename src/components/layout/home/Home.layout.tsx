@@ -1,8 +1,8 @@
 'use client'
 
-import { isCloudStorageSupported } from '@telegram-apps/sdk-react'
-import { List } from '@telegram-apps/telegram-ui'
+import { cloudStorage } from '@tma.js/sdk-react'
 import { type PropsWithChildren, memo } from 'react'
+import { List } from 'tmaui'
 import { Header } from './header/Header'
 
 export const HomeLayout = memo(function HomeLayout({
@@ -10,7 +10,7 @@ export const HomeLayout = memo(function HomeLayout({
 }: PropsWithChildren) {
     return (
         <>
-            {isCloudStorageSupported() && <Header />}
+            {cloudStorage.isSupported() && <Header />}
 
             <List>{children}</List>
         </>

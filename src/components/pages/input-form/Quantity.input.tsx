@@ -1,8 +1,8 @@
-import { Input, Section } from '@telegram-apps/telegram-ui'
 import { Blocks, Weight } from 'lucide-react'
 import { useTranslations } from 'next-intl'
 import { memo } from 'react'
 import { useFormContext } from 'react-hook-form'
+import { Input, Section } from 'tmaui'
 import { IconCell } from '@/components/shared/icon-cell/IconCell'
 import type { ItemForm } from '@/shared/interfaces/item.interface'
 

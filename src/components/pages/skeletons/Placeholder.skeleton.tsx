@@ -1,5 +1,5 @@
-import { LargeTitle, Placeholder, Title } from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
+import { LargeTitle, Placeholder, Title } from 'tmaui'
 import { Currency } from '@/shared/enums/currency.enum'
 import { Unit } from '@/shared/enums/unit.enum'
 

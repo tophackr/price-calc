@@ -1,8 +1,4 @@
-import {
-    getCloudStorageItem,
-    isCloudStorageSupported,
-    setCloudStorageItem
-} from '@telegram-apps/sdk-react'
+import { cloudStorage } from '@tma.js/sdk-react'
 import { Unit } from '@/shared/enums/unit.enum'
 
 const UNIT_NAME = 'TG_UNIT'
@@ -10,15 +6,15 @@ const UNIT_NAME = 'TG_UNIT'
 export const defaultUnit = Unit.kilogram
 
 export async function getUnit(): Promise<Unit> {
-    if (!isCloudStorageSupported()) return defaultUnit
+    if (!cloudStorage.isSupported()) return defaultUnit
 
-    const unit = await getCloudStorageItem(UNIT_NAME)
+    const unit = await cloudStorage.getItem(UNIT_NAME)
 
     return (unit || defaultUnit) as Unit
 }
 
 export async function setUnit(unit?: Unit) {
-    if (isCloudStorageSupported()) {
-        await setCloudStorageItem(UNIT_NAME, unit || defaultUnit)
+    if (cloudStorage.isSupported()) {
+        await cloudStorage.setItem(UNIT_NAME, unit || defaultUnit)
     }
 }

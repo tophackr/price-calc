@@ -1,8 +1,8 @@
-class PAGES {
-    HOME = '/'
-    SETTINGS = '/settings'
+class Pages {
+    home = '/'
+    settings = '/settings'
 
     itemId = (id: number) => `/i/${id}`
 }
 
-export const PAGES_URL = new PAGES()
+export const pagesUrl = new Pages()

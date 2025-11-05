@@ -1,9 +1,9 @@
 'use client'
 
-import { Button } from '@telegram-apps/telegram-ui'
 import { useRouter } from 'next/navigation'
 import { type PropsWithChildren, memo, useCallback } from 'react'
-import { PAGES_URL } from '@/config/pages-url.config'
+import { Button } from 'tmaui'
+import { pagesUrl } from '@/config/pages-url.config'
 
 export const NotFoundButton = memo(function NotFoundButton({
     children
@@ -11,7 +11,7 @@ export const NotFoundButton = memo(function NotFoundButton({
     const router = useRouter()
 
     const onClick = useCallback(() => {
-        router.push(PAGES_URL.HOME)
+        router.push(pagesUrl.home)
     }, [router])
 
     return (

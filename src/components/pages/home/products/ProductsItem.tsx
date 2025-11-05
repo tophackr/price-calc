@@ -1,8 +1,8 @@
-import { Cell } from '@telegram-apps/telegram-ui'
 import { useTranslations } from 'next-intl'
 import { useRouter } from 'next/navigation'
 import { memo, useCallback } from 'react'
-import { PAGES_URL } from '@/config/pages-url.config'
+import { Cell } from 'tmaui'
+import { pagesUrl } from '@/config/pages-url.config'
 import { formatCost } from '@/utils/string/format-cost'
 import type { ItemProps } from './Products.interface'
 
@@ -28,7 +28,7 @@ export const ProductsItem = memo(function ProductsItem({
     const router = useRouter()
 
     const onItemClick = useCallback(() => {
-        router.push(PAGES_URL.itemId(id))
+        router.push(pagesUrl.itemId(id))
     }, [id, router])
 
     return (
