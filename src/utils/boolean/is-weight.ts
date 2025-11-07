@@ -1,3 +1,3 @@
-import { Unit } from '@/shared/enums/unit.enum'
+import { Unit } from '@/types/unit'
 
 export const isWeight = (unit: Unit): boolean => ![Unit.pieces].includes(unit)

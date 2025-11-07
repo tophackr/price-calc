@@ -2,30 +2,30 @@ import { type PayloadAction, createSlice } from '@reduxjs/toolkit'
 import type { WritableDraft } from 'immer'
 import type { RootState } from '../store'
 import { defaultProducts } from './products'
-import type { IProduct } from './products.types'
+import type { Products } from './products.types'
 
 interface ProductsState {
-    value: IProduct[]
+  value: Products
 }
 
 const initialState: ProductsState = {
-    value: defaultProducts
+  value: defaultProducts
 }
 
 const productsSlice = createSlice({
-    name: 'products',
-    initialState,
-    reducers: {
-        setProducts(
-            state: WritableDraft<ProductsState>,
-            action: PayloadAction<IProduct[]>
-        ) {
-            state.value = action.payload
-        }
+  name: 'products',
+  initialState,
+  reducers: {
+    setProducts(
+      state: WritableDraft<ProductsState>,
+      action: PayloadAction<Products>
+    ) {
+      state.value = action.payload
     }
+  }
 })
 
 export const selectProducts = (state: RootState) => state.productsSlice.value
 
 export const { actions: productsSliceActions, reducer: productsSliceReducer } =
-    productsSlice
+  productsSlice

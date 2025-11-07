@@ -1,137 +1,42 @@
 'use client'
 
-import dynamic from 'next/dynamic'
-import { notFound } from 'next/navigation'
-import { memo, useCallback, useState } from 'react'
-import { FormProvider, useForm } from 'react-hook-form'
-import { InputForm } from '@/components/pages/input-form/Input.form'
-import type { Currency } from '@/shared/enums/currency.enum'
-import type { Unit } from '@/shared/enums/unit.enum'
-import type { ICalculateCosts } from '@/shared/interfaces/calculate-cost.interface'
-import type { ItemIdProps, ItemOrder } from '@/shared/interfaces/item.interface'
-import { useProducts } from '@/store/products/use-products'
-import { useBackButton } from '@/hooks/use-back-button'
-import { useSettingsButton } from '@/hooks/use-settings-button'
-import { useWatchForm } from '@/hooks/use-watch-form'
-import { isWeight } from '@/utils/boolean/is-weight'
-import {
-    calculatePieces,
-    calculateWeight
-} from '@/utils/integer/calculate-costs'
-import { NameSkeleton } from '../skeletons/Name.skeleton'
-import { DeleteButton } from './DeleteButton'
-import { useSaveProduct } from './use-save-product'
+import { useTranslations } from 'next-intl'
+import { memo } from 'react'
+import { Section } from 'tmaui'
+import { InputForm } from '@/components/pages/input-form/InputForm'
+import { DeleteButton } from '@/components/ui/action/DeleteButton'
+import { SaveButton } from '@/components/ui/action/SaveButton'
+import { BackButton } from '@/components/ui/tma/BackButton'
+import type { ItemIdProps } from '@/types/item'
+import { pagesUrl } from '@/config/pages-url.config'
+import { useSaveProducts } from '../home/products/useSaveProducts'
+import { useWatchProduct } from '../home/useWatchProduct'
+import { NameInput } from '../input-form/NameInput'
+import { useDeleteProduct } from './useDeleteProduct'
 
-const DynamicName = dynamic(
-    () => import('../input-form/Name.input').then(mod => mod.NameInput),
-    {
-        loading: () => <NameSkeleton />,
-        ssr: false
-    }
-)
+export const ItemId = memo(({ id }: ItemIdProps) => {
+  const t = useTranslations('Home')
 
-export const ItemId = memo(function ItemId({ id }: ItemIdProps) {
-    useSettingsButton()
-    useBackButton()
+  const item = useWatchProduct()
+  const saveCallback = useSaveProducts({ item })
+  const deleteCallback = useDeleteProduct(id)
 
-    const { products, setProductsWithCloud } = useProducts()
-    const item = products[Number(id)]
+  return (
+    <BackButton route={pagesUrl.home}>
+      <NameInput />
 
-    if (!item) {
-        notFound()
-    }
+      <InputForm item={item} />
 
-    const [total, setTotal] = useState<ICalculateCosts>({
-        rounded: item.rounded,
-        costRounded: item.costRounded,
-        remainder: item.remainder
-    })
-    const [unit, setUnit] = useState(item.unit)
-    const [currency, setCurrency] = useState(item.currency)
-
-    const { watch, reset, getValues, ...rest } = useForm<ItemOrder>({
-        defaultValues: {
-            quantity: item.quantity,
-            cost: item.cost,
-            name: item.name
-        },
-        mode: 'onChange'
-    })
-
-    const handleCallback = useCallback(
-        ({ quantity, cost }: ItemOrder) => {
-            if (!quantity || !cost) {
-                return
-            }
-
-            setTotal(
-                isWeight(unit)
-                    ? calculateWeight(quantity, cost)
-                    : calculatePieces(quantity, cost)
-            )
-        },
-        [unit]
-    )
-
-    useWatchForm({ watch, callback: handleCallback })
-
-    const onChangeUnit = useCallback(
-        (value: string) => {
-            if (isWeight(value as Unit) !== isWeight(unit)) {
-                setTotal({
-                    rounded: item.rounded,
-                    costRounded: item.costRounded,
-                    remainder: item.remainder
-                })
-                reset()
-            }
-
-            setUnit(value as Unit)
-        },
-        [item.costRounded, item.remainder, item.rounded, reset, unit]
-    )
-
-    const onChangeCurrency = useCallback((value: string) => {
-        setCurrency(value as Currency)
-    }, [])
-
-    useSaveProduct({
-        itemId: Number(id),
-        item,
-        products,
-        setProducts: setProductsWithCloud,
-        initData: {
-            rounded: total.rounded,
-            costRounded: total.costRounded,
-            remainder: total.remainder,
-            unit,
-            currency,
-            ...getValues()
-        }
-    })
-
-    return (
-        <FormProvider
-            watch={watch}
-            reset={reset}
-            getValues={getValues}
-            {...rest}
-        >
-            <DynamicName />
-
-            <InputForm
-                total={total}
-                unit={unit}
-                onChangeUnit={onChangeUnit}
-                currency={currency}
-                onChangeCurrency={onChangeCurrency}
-            />
-
-            <DeleteButton
-                id={id}
-                products={products}
-                setProducts={setProductsWithCloud}
-            />
-        </FormProvider>
-    )
+      <Section>
+        <DeleteButton
+          onClick={deleteCallback}
+          message={t('delete_message')}
+        />
+      </Section>
+      <SaveButton
+        callback={saveCallback}
+        withInvisible
+      />
+    </BackButton>
+  )
 })

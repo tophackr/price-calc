@@ -1,34 +1,45 @@
-import type { ICalculateCosts } from '@/shared/interfaces/calculate-cost.interface'
+import type { Product } from '@/store/products/products.types'
+
+export type CalculatedProduct = Pick<
+  Product,
+  'roundedWeight' | 'roundedSum' | 'remainderSum'
+>
 
 function calculateCostPerUnit(quantity: number, totalCost: number): number {
-    return totalCost / quantity
+  return totalCost / quantity
 }
 
 function calculateTotalCost(weight: number, costPerKg: number): number {
-    return weight * costPerKg
+  return weight * costPerKg
 }
 
-export function calculateWeight(weight: number, cost: number): ICalculateCosts {
-    const costPerKg = calculateCostPerUnit(weight, cost)
+export function calculateWeight(
+  weight: number,
+  price: number
+): CalculatedProduct {
+  const costPerKg = calculateCostPerUnit(weight, price)
 
-    const rounded = Math.ceil(weight)
-    const costRounded = calculateTotalCost(rounded, costPerKg)
-    const remainder = calculateTotalCost(1, costPerKg)
+  const roundedWeight = Math.ceil(weight)
+  const roundedSum = calculateTotalCost(roundedWeight, costPerKg)
+  const remainderSum = calculateTotalCost(1, costPerKg)
 
-    const data: ICalculateCosts = { rounded, costRounded }
+  const data: CalculatedProduct = { roundedWeight, roundedSum }
 
-    if (rounded && rounded !== 1) {
-        Object.assign(data, { remainder })
-    }
+  if (roundedWeight && roundedWeight !== 1) {
+    Object.assign(data, { remainderSum })
+  }
 
-    return data
+  return data
 }
 
-export function calculatePieces(pieces: number, cost: number): ICalculateCosts {
-    const costPerPiece = calculateCostPerUnit(pieces, cost)
+export function calculatePieces(
+  pieces: number,
+  price: number
+): CalculatedProduct {
+  const costPerPiece = calculateCostPerUnit(pieces, price)
 
-    return {
-        rounded: 1,
-        costRounded: costPerPiece
-    }
+  return {
+    roundedWeight: 1,
+    roundedSum: costPerPiece
+  }
 }

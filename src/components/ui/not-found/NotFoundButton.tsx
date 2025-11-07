@@ -1,26 +1,22 @@
 'use client'
 
-import { useRouter } from 'next/navigation'
-import { type PropsWithChildren, memo, useCallback } from 'react'
+import { type PropsWithChildren, memo } from 'react'
 import { Button } from 'tmaui'
 import { pagesUrl } from '@/config/pages-url.config'
+import { useButtonClick } from '@/utils/button-click/useButtonClick'
 
 export const NotFoundButton = memo(function NotFoundButton({
-    children
+  children
 }: PropsWithChildren) {
-    const router = useRouter()
+  const props = useButtonClick({ route: pagesUrl.home })
 
-    const onClick = useCallback(() => {
-        router.push(pagesUrl.home)
-    }, [router])
-
-    return (
-        <Button
-            size='l'
-            stretched={true}
-            onClick={onClick}
-        >
-            {children}
-        </Button>
-    )
+  return (
+    <Button
+      size='l'
+      stretched={true}
+      {...props}
+    >
+      {children}
+    </Button>
+  )
 })

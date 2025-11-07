@@ -1,5 +1,19 @@
-import type { ICalculateCosts } from '@/shared/interfaces/calculate-cost.interface'
-import type { ItemOrder } from '@/shared/interfaces/item.interface'
-import type { Measurement } from '@/shared/interfaces/measurement.interface'
+import type { Currency } from '@/types/currency'
+import type { Unit } from '@/types/unit'
 
-export type IProduct = ICalculateCosts & ItemOrder & Measurement
+export interface Product {
+  id: string
+
+  roundedWeight: number // Округленный вес
+  roundedSum: number // Округленная сумма
+  remainderSum?: number // Округленная сумма если более 1кг
+
+  name?: string // Название
+  weight: number // Вес
+  price: number // Цена
+
+  unit: Unit // Единица измерения
+  currency: Currency[number] // Валюта
+}
+
+export type Products = Record<string, Product>

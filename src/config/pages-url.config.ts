@@ -1,8 +1,8 @@
 class Pages {
-    home = '/'
-    settings = '/settings'
+  home = '/'
+  settings = '/settings'
 
-    itemId = (id: number) => `/i/${id}`
+  itemId = (id: string) => `/i/${id}`
 }
 
 export const pagesUrl = new Pages()

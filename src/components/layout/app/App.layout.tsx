@@ -1,22 +1,23 @@
-import { SpeedInsights } from '@vercel/speed-insights/next'
-import { useLocale } from 'next-intl'
-import { type PropsWithChildren } from 'react'
-import { Placeholder } from 'tmaui'
-import { HeadProvider } from '@/providers/HeadProvider'
+import { getLocale } from 'next-intl/server'
+import type { PropsWithChildren } from 'react'
+import { ClientI18nProvider } from '@/providers/ClientI18nProvider'
+import { StoreProvider } from '@/providers/StoreProvider'
+import { TelegramProvider } from '@/providers/TelegramProvider'
 
-export function AppLayout({ children }: PropsWithChildren) {
-    const locale = useLocale()
+export async function AppLayout({ children }: PropsWithChildren) {
+  const locale = await getLocale()
 
-    return (
-        <html lang={locale}>
-            <body>
-                <div id={'app'}>
-                    <HeadProvider>{children}</HeadProvider>
-
-                    <Placeholder />
-                    <SpeedInsights />
-                </div>
-            </body>
-        </html>
-    )
+  return (
+    <html lang={locale}>
+      <body>
+        <div id='app'>
+          <StoreProvider>
+            <TelegramProvider>
+              <ClientI18nProvider>{children}</ClientI18nProvider>
+            </TelegramProvider>
+          </StoreProvider>
+        </div>
+      </body>
+    </html>
+  )
 }

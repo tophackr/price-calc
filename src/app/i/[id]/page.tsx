@@ -1,11 +1,16 @@
 import { memo } from 'react'
+import { ItemFormProvider } from '@/components/layout/item/ItemFormProvider'
 import { ItemId } from '@/components/pages/item/ItemId'
-import type { ItemIdPageProps } from '@/shared/interfaces/item.interface'
+import type { ItemIdParamsProps } from '@/types/item'
 
-const Page = memo(async function Page({ params }: ItemIdPageProps) {
-    const { id } = await params
+const Page = memo(async ({ params }: ItemIdParamsProps) => {
+  const { id } = await params
 
-    return <ItemId id={id} />
+  return (
+    <ItemFormProvider id={id}>
+      <ItemId id={id} />
+    </ItemFormProvider>
+  )
 })
 
 export default Page
