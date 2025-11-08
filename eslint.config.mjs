@@ -1,5 +1,6 @@
 import eslint from '@eslint/js'
 import prettier from 'eslint-config-prettier/flat'
+import 'eslint-plugin-only-warn'
 import reactPlugin from 'eslint-plugin-react'
 import reactHooks from 'eslint-plugin-react-hooks'
 import { defineConfig, globalIgnores } from 'eslint/config'
