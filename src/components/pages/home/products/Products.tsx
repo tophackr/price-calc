@@ -1,12 +1,12 @@
-import { useTranslations } from 'next-intl'
 import { memo, useCallback, useMemo } from 'react'
 import { Section } from 'tmaui'
+import { useTranslations } from 'use-intl'
 import { DeleteButton } from '@/components/ui/action/DeleteButton'
 import { defaultMaxProducts } from '@/constants/default.constants'
 import { useProducts } from '@/store/products/useProducts'
 import { ProductsCell } from './ProductsCell'
 
-export const Products = memo(() => {
+export const Products = memo(function Products() {
   const t = useTranslations('Products')
 
   const { products, setProductsWithCloud } = useProducts()

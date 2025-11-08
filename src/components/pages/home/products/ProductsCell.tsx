@@ -1,6 +1,6 @@
-import { useFormatter, useTranslations } from 'next-intl'
 import { memo, useCallback } from 'react'
 import { Cell } from 'tmaui'
+import { useFormatter, useTranslations } from 'use-intl'
 import type { ItemProps } from '@/types/item'
 import { pagesUrl } from '@/config/pages-url.config'
 import { useButtonClick } from '@/utils/button-click/useButtonClick'

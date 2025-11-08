@@ -1,5 +1,5 @@
-import { useTranslations } from 'next-intl'
 import { memo, useMemo } from 'react'
+import { useTranslations } from 'use-intl'
 import { Currency } from '@/types/currency'
 import type { ItemProps } from '@/types/item'
 import { isWeight } from '@/utils/boolean/is-weight'
@@ -8,7 +8,7 @@ import { PriceInput } from './PriceInput'
 import { SelectInput } from './SelectInput'
 import { WeightInput } from './WeightInput'
 
-export const InputForm = memo(({ item }: ItemProps) => {
+export const InputForm = memo(function InputForm({ item }: ItemProps) {
   const t = useTranslations('Currency')
 
   const availableCurrency = useMemo(

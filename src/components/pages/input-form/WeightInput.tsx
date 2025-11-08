@@ -1,7 +1,7 @@
-import { useTranslations } from 'next-intl'
 import { memo } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { Input, Section } from 'tmaui'
+import { useTranslations } from 'use-intl'
 import type { Product } from '@/store/products/products.types'
 import { inputErrorStatus } from '@/utils/when'
 import { valueAsFloat } from './valueAsFloat'

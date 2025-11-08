@@ -1,6 +1,6 @@
-import { useTranslations } from 'next-intl'
 import { useFormContext } from 'react-hook-form'
 import { Section, Select } from 'tmaui'
+import { useTranslations } from 'use-intl'
 import { Currency } from '@/types/currency'
 import { Unit } from '@/types/unit'
 import type { Product } from '@/store/products/products.types'

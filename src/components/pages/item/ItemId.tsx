@@ -1,8 +1,8 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { memo } from 'react'
 import { Section } from 'tmaui'
+import { useTranslations } from 'use-intl'
 import { InputForm } from '@/components/pages/input-form/InputForm'
 import { DeleteButton } from '@/components/ui/action/DeleteButton'
 import { SaveButton } from '@/components/ui/action/SaveButton'
@@ -14,7 +14,7 @@ import { useWatchProduct } from '../home/useWatchProduct'
 import { NameInput } from '../input-form/NameInput'
 import { useDeleteProduct } from './useDeleteProduct'
 
-export const ItemId = memo(({ id }: ItemIdProps) => {
+export const ItemId = memo(function ItemId({ id }: ItemIdProps) {
   const t = useTranslations('Home')
 
   const item = useWatchProduct()

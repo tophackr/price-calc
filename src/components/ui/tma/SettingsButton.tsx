@@ -1,8 +1,6 @@
-'use client'
-
 import { settingsButton, useSignal } from '@tma.js/sdk-react'
-import { usePathname, useRouter } from 'next/navigation'
-import { useCallback, useEffect } from 'react'
+import { type JSX, useCallback, useEffect } from 'react'
+import { Outlet, useLocation, useNavigate } from 'react-router'
 import { pagesUrl } from '@/config/pages-url.config'
 
 function visibleOnSettingsPage(
@@ -16,16 +14,16 @@ function notVisibleOnPage(visible: boolean, pathname: string | null): boolean {
   return !visible && pathname !== pagesUrl.settings
 }
 
-export function useSettingsButton() {
-  const router = useRouter()
-  const pathname = usePathname()
+export function SettingsButton(): JSX.Element {
+  const navigate = useNavigate()
+  const location = useLocation()
 
   const isVisible = useSignal(settingsButton.isVisible)
   const isMounted = useSignal(settingsButton.isMounted)
 
   const onClick = useCallback(() => {
-    router.push(pagesUrl.settings)
-  }, [router])
+    void navigate(pagesUrl.settings)
+  }, [navigate])
 
   useEffect(() => {
     const offClick = settingsButton.onClick(onClick)
@@ -39,10 +37,12 @@ export function useSettingsButton() {
     if (!isMounted) {
       return
     }
-    if (visibleOnSettingsPage(isVisible, pathname)) {
+    if (visibleOnSettingsPage(isVisible, location.pathname)) {
       settingsButton.hide()
-    } else if (notVisibleOnPage(isVisible, pathname)) {
+    } else if (notVisibleOnPage(isVisible, location.pathname)) {
       settingsButton.show()
     }
-  }, [isMounted, isVisible, pathname])
+  }, [isMounted, isVisible, location])
+
+  return <Outlet />
 }

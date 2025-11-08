@@ -1,9 +1,9 @@
 'use client'
 
 import { hapticFeedback } from '@tma.js/sdk-react'
-import { useRouter } from 'next/navigation'
 import type { MouseEvent } from 'react'
 import { useCallback, useState } from 'react'
+import { useNavigate } from 'react-router'
 import type { RouteProps } from '@/types/route-props'
 import type { MouseClickEvent } from './mouse-click.type'
 
@@ -20,7 +20,7 @@ export function useButtonClick<T = MouseEvent>({
   callback
 }: Partial<RouteProps | { route?: number }> &
   UseButtonClickProps<T>): MouseClickEvent<T> {
-  const router = useRouter()
+  const navigate = useNavigate()
 
   const [disabled, setDisabled] = useState(false)
 
@@ -40,13 +40,13 @@ export function useButtonClick<T = MouseEvent>({
         }
 
         if (route) {
-          await router.push(route as string)
+          await navigate(route as string)
         }
       } finally {
         setDisabled(false)
       }
     },
-    [callback, disabled, route, router]
+    [callback, disabled, route, navigate]
   )
 
   return { disabled, onClick }

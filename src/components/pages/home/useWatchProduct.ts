@@ -1,8 +1,6 @@
-import { useCallback, useEffect, useState } from 'react'
-import { useFormContext } from 'react-hook-form'
-import { Unit } from '@/types/unit'
+import { useMemo } from 'react'
+import { useFormContext, useWatch } from 'react-hook-form'
 import type { Product } from '@/store/products/products.types'
-import { useWatchForm } from '@/hooks/useWatchForm'
 import { isWeight } from '@/utils/boolean/is-weight'
 import {
   type CalculatedProduct,
@@ -17,53 +15,22 @@ const initialCalculated: CalculatedProduct = {
 }
 
 export function useWatchProduct(): Product {
-  const [calculated, setCalculated] = useState(initialCalculated)
+  const { getValues, control } = useFormContext<Product>()
 
-  const [unit, setUnit] = useState(Unit.kilogram)
+  const unit = useWatch({ control, name: 'unit' })
+  const weight = useWatch({ control, name: 'weight' })
+  const price = useWatch({ control, name: 'price' })
+  const values = getValues()
 
-  const { watch, reset, getValues } = useFormContext<Product>()
-  const watchUnit = watch('unit')
-
-  const onWatchCallback = useCallback(
-    ({ weight, price }: Product) => {
-      if (!weight || !price) {
-        return
-      }
-
-      setCalculated(
-        isWeight(unit)
-          ? calculateWeight(weight, price)
-          : calculatePieces(weight, price)
-      )
-    },
-    [unit]
-  )
-
-  useWatchForm({ watch, callback: onWatchCallback })
-
-  useEffect(() => {
-    if (isWeight(watchUnit) !== isWeight(unit)) {
-      setCalculated(initialCalculated)
-      reset({
-        ...getValues(),
-        ...initialCalculated,
-        price: undefined,
-        weight: undefined
-      })
-    }
-
-    if (watchUnit !== unit) {
-      setUnit(watchUnit)
-    }
-  }, [getValues, reset, unit, watchUnit])
-
-  const { roundedWeight, roundedSum, remainderSum } = getValues()
+  const calculated = useMemo(() => {
+    if (!weight || !price) return initialCalculated
+    return isWeight(unit)
+      ? calculateWeight(weight, price)
+      : calculatePieces(weight, price)
+  }, [unit, weight, price])
 
   return {
-    ...getValues(),
-    roundedWeight:
-      calculated.roundedWeight > 0 ? calculated.roundedWeight : roundedWeight,
-    roundedSum: calculated.roundedSum > 0 ? calculated.roundedSum : roundedSum,
-    remainderSum: calculated.remainderSum ?? remainderSum
+    ...values,
+    ...calculated
   }
 }

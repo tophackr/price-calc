@@ -1,6 +1,9 @@
-import { Translation } from '@/i18n/types'
+import { locales } from '@/i18n/config'
+import type { Translation } from '@/i18n/types'
 
-declare global {
-    // Use type safe message keys with `next-intl`
-    type IntlMessages = Translation
+declare module 'use-intl' {
+  interface AppConfig {
+    Locale: (typeof locales)[number]
+    Messages: Translation
+  }
 }

@@ -1,8 +1,13 @@
 'use client'
 
-import { NextIntlClientProvider } from 'next-intl'
-import { type PropsWithChildren, memo, useEffect, useState } from 'react'
-import { Loader } from '@/components/ui/Loader'
+import {
+  type PropsWithChildren,
+  memo,
+  useLayoutEffect,
+  useState,
+  useTransition
+} from 'react'
+import { IntlProvider } from 'use-intl'
 import { defaultTimeZone } from '@/i18n/config'
 import { getLocales } from '@/i18n/get-locales'
 import type { Translation } from '@/i18n/types'
@@ -14,32 +19,22 @@ export const ClientI18nProvider = memo(function ClientI18nProvider({
   const { locale } = useLocale()
 
   const [messages, setMessages] = useState<Translation | null>(null)
+  const [, startTransition] = useTransition()
 
-  useEffect(() => {
-    const loadMessages = async () => {
-      if (locale) {
-        const { messages } = await getLocales(locale)
-
-        setMessages(messages)
-      }
-    }
-
-    if (locale) {
-      loadMessages()
-    }
+  useLayoutEffect(() => {
+    startTransition(async () => {
+      const { messages } = await getLocales(locale)
+      setMessages(messages)
+    })
   }, [locale])
 
-  if (!messages) {
-    return <Loader />
-  }
-
   return (
-    <NextIntlClientProvider
+    <IntlProvider
       locale={locale}
       messages={messages}
       timeZone={defaultTimeZone}
     >
       {children}
-    </NextIntlClientProvider>
+    </IntlProvider>
   )
 })

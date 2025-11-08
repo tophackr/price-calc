@@ -1,4 +1,4 @@
-import type { useFormatter } from 'next-intl'
+import type { useFormatter } from 'use-intl'
 import type { Currency } from '@/types/currency'
 
 export function formatCurrency(
@@ -9,6 +9,7 @@ export function formatCurrency(
   return formatter.number(value, {
     style: 'currency',
     currency,
+    currencyDisplay: 'narrowSymbol',
     minimumFractionDigits: 2,
     maximumFractionDigits: 2
   })

@@ -1,6 +1,5 @@
 'use client'
 
-import { notFound } from 'next/navigation'
 import type { PropsWithChildren } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
 import { List } from 'tmaui'
@@ -18,10 +17,6 @@ export function ItemFormProvider({
   const { products } = useProducts()
   const item = id ? products[id] : {}
 
-  if (id && !item) {
-    notFound()
-  }
-
   useResetAfterSave({
     reset: methods.reset,
     data: {
@@ -32,6 +27,11 @@ export function ItemFormProvider({
       ...item
     }
   })
+
+  if (id && !item) {
+    // TODO: make nf page
+    return null
+  }
 
   return (
     <FormProvider {...methods}>

@@ -1,13 +1,11 @@
 'use client'
 
-import DuckNotFound from '@public/lottie/Duck-NotFound.json'
-import { useTranslations } from 'next-intl'
-import dynamic from 'next/dynamic'
+import Lottie from 'lottie-react'
 import { List, Placeholder } from 'tmaui'
+import { useTranslations } from 'use-intl'
 import { BackButton } from '../tma/BackButton'
 import { NotFoundButton } from './NotFoundButton'
-
-const LottieLazy = dynamic(() => import('lottie-react'), { ssr: false })
+import DuckNotFound from '@/lottie/Duck-NotFound.json'
 
 export function NotFound() {
   const t = useTranslations('NotFound')
@@ -20,7 +18,7 @@ export function NotFound() {
           description={t('description')}
           action={<NotFoundButton>{t('button')}</NotFoundButton>}
         >
-          <LottieLazy
+          <Lottie
             width={144}
             height={144}
             animationData={DuckNotFound}

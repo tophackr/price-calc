@@ -1,10 +1,9 @@
 'use client'
 
-import { useTranslations } from 'next-intl'
 import { useCallback } from 'react'
-import { Section, Select } from 'tmaui'
+import { Link, Section, Select } from 'tmaui'
+import { useTranslations } from 'use-intl'
 import { SectionLeadingFooter } from '@/components/shared/SectionLeadingFooter'
-import { Link } from '@/components/shared/link/Link'
 import { localesMap } from '@/i18n/config'
 import type { Locale } from '@/i18n/types'
 import { useLocale } from '@/store/lang/useLocale'
@@ -28,7 +27,7 @@ export function LanguageSelect() {
         <SectionLeadingFooter>
           {t.rich('footer', {
             CrowdinLink: chunk => (
-              <Link href={process.env['NEXT_PUBLIC_CROWDIN_LINK'] || ''}>
+              <Link href={import.meta.env.VITE_CROWDIN_LINK || ''}>
                 {chunk}
               </Link>
             )

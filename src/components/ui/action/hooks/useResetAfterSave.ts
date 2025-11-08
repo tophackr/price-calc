@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import type { FieldValues, UseFormReset } from 'react-hook-form'
 import { isCleanedEqual } from '@/utils/lodash/isCleanedEqual'
 
@@ -14,10 +14,8 @@ export function useResetAfterSave<
 >({ data, reset }: UseResetAfterSaveProps<TFieldValues>): void {
   const [cashedData, setCashedData] = useState<TFieldValues>()
 
-  useEffect(() => {
-    if (data && (!cashedData || !isCleanedEqual(data, cashedData))) {
-      reset(data)
-      setCashedData(data)
-    }
-  }, [cashedData, data, reset])
+  if (data && (!cashedData || !isCleanedEqual(data, cashedData))) {
+    reset(data)
+    setCashedData(data)
+  }
 }

@@ -7,7 +7,3 @@ export type ItemIdProps = {
 export type ItemProps = {
   item: Product
 }
-
-export interface ItemIdParamsProps {
-  params: Promise<ItemIdProps>
-}

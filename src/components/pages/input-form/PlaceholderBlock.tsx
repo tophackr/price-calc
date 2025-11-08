@@ -1,8 +1,8 @@
 'use client'
 
-import { useFormatter, useTranslations } from 'next-intl'
 import { memo, useCallback } from 'react'
 import { Headline, LargeTitle, Placeholder } from 'tmaui'
+import { useFormatter, useTranslations } from 'use-intl'
 import type { ItemProps } from '@/types/item'
 import { toFixedNumber } from '@/utils/integer/toFixedNumber'
 import { formatCurrency } from '@/utils/string/format-currency'

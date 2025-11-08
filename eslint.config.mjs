@@ -1,22 +1,28 @@
-import nextCoreWebVitals from "eslint-config-next/core-web-vitals";
-import nextTypescript from "eslint-config-next/typescript";
-import { FlatCompat } from '@eslint/eslintrc'
-import { dirname } from 'path'
-import { fileURLToPath } from 'url'
+import eslint from '@eslint/js'
+import prettier from 'eslint-config-prettier/flat'
+import reactPlugin from 'eslint-plugin-react'
+import reactHooks from 'eslint-plugin-react-hooks'
+import { defineConfig, globalIgnores } from 'eslint/config'
+import tseslint from 'typescript-eslint'
 
-const __filename = fileURLToPath(import.meta.url)
-const __dirname = dirname(__filename)
-
-const compat = new FlatCompat({
-  baseDirectory: __dirname
-})
-
-const eslintConfig = [...nextCoreWebVitals, ...nextTypescript, ...compat.extends("prettier"), {
-  rules: {
-    'react/display-name': 'off'
-  }
-}, {
-  ignores: ["node_modules/**", ".next/**", "out/**", "build/**", "next-env.d.ts"]
-}]
+const eslintConfig = defineConfig([
+  eslint.configs.recommended,
+  tseslint.configs.recommended,
+  reactPlugin.configs.flat.recommended,
+  reactHooks.configs.flat.recommended,
+  prettier,
+  {
+    rules: {
+      'react/react-in-jsx-scope': 'off',
+      'react/prop-types': 'off'
+    },
+    settings: {
+      react: {
+        version: 'detect'
+      }
+    }
+  },
+  globalIgnores(['dist/**', '*.d.ts'])
+])
 
 export default eslintConfig

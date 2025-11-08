@@ -1,18 +1,13 @@
 'use client'
 
-import { type PropsWithChildren, memo, useRef } from 'react'
+import { type PropsWithChildren, memo, useMemo } from 'react'
 import { Provider } from 'react-redux'
-import { type AppStore, makeStore } from '@/store/store'
+import { makeStore } from '@/store/store'
 
 export const StoreProvider = memo(function StoreProvider({
-    children
+  children
 }: PropsWithChildren) {
-    const storeRef = useRef<AppStore | null>(null)
+  const store = useMemo(() => makeStore(), [])
 
-    if (!storeRef.current) {
-        // Create the store instance the first time this renders
-        storeRef.current = makeStore()
-    }
-
-    return <Provider store={storeRef.current}>{children}</Provider>
+  return <Provider store={store}>{children}</Provider>
 })
