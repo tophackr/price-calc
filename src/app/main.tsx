@@ -39,9 +39,17 @@ const root = createRoot(document.querySelector('#app')!, {
 
 try {
   const launchParams = retrieveLaunchParams()
-  const { tgWebAppPlatform: platform, tgWebAppStartParam } = launchParams
+  const {
+    tgWebAppPlatform: platform,
+    tgWebAppStartParam,
+    tgWebAppData
+  } = launchParams
   const debug =
     (tgWebAppStartParam || '').includes('debug') || import.meta.env.DEV
+
+  mixpanel.identify(
+    tgWebAppData?.user?.id ? String(tgWebAppData?.user?.id) : undefined
+  )
 
   // Configure all application dependencies.
   await init({
