@@ -55,13 +55,7 @@ export function SaveButton<T extends FieldValues>({
         withInvisible ? Object.keys(dirtyFields).length > 0 : undefined
       }
       onClick={handleSubmit(
-        callMultiple(
-          () => {
-            throw new Error('This is your first error!')
-          },
-          onClick,
-          successCallback
-        ),
+        callMultiple(onClick, successCallback),
         onErrorCallback
       )}
       {...props}
