@@ -8,7 +8,7 @@ import { Products } from './products/Products'
 import { useSaveProducts } from './products/useSaveProducts'
 import { useWatchProduct } from './useWatchProduct'
 
-export const Home = memo(() => {
+export const Home = memo(function Home() {
   const item = useWatchProduct()
   const saveCallback = useSaveProducts({ item })
 
