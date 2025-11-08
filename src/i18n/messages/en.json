@@ -1,76 +1,66 @@
 {
-    "Search": {
-        "placeholder": "Search...",
-        "Loading": {
-            "title": "Searching...",
-            "description": "Please wait a moment and you will see everything."
-        },
-        "NotFound": {
-            "title": "Nothing found",
-            "description": "Try changing your query."
-        },
-        "Nothing": {
-            "title": "There's nothing here",
-            "description": "It's time to come up with something!"
-        }
+  "Common": {
+    "error": "Ошибка",
+    "save": "Сохранить",
+    "delete": "Удалить",
+    "deletion": "Удаление"
+  },
+  "Currency": {
+    "RUB": "Рубль",
+    "USD": "Доллар"
+  },
+  "Home": {
+    "name": {
+      "title": "Name",
+      "placeholder": "Введите название"
     },
-    "Home": {
-        "name": {
-            "title": "Name"
-        },
-        "weight": {
-            "title": "Weight",
-            "footer": "You do not need to enter the full weight of the product that is indicated on the price tag."
-        },
-        "pieces": {
-            "title": "Quantity",
-            "footer": "You need to enter the quantity of the product indicated on the package."
-        },
-        "cost": {
-            "title": "Cost",
-            "footer": "Enter the amount of the product, and we will calculate the full cost."
-        },
-        "unit": {
-            "title": "Unit",
-            "values": {
-                "kg": "kg",
-                "l": "l",
-                "pc": "pc"
-            }
-        },
-        "currency": {
-            "title": "Currency"
-        }
+    "weight": {
+      "title": "Weight",
+      "placeholder": "Введите вес",
+      "required_error": "Вы не ввели вес"
     },
-    "Products": {
-        "header": "Saved Items",
-        "button": "Save",
-        "Clear": {
-            "title": "Clear Data",
-            "description": "Are you sure you want to clear the whole story? The process is irreversible!",
-            "button": "Clear"
-        },
-        "Delete": {
-            "button": "Delete"
-        }
+    "pieces": {
+      "title": "Quantity",
+      "placeholder": "Введите количество",
+      "required_error": "Вы не ввели количество"
     },
-    "Settings": {
-        "Language": {
-            "header": "Language",
-            "footer": "You can help us with the translation! Switch to the <CrowdinLink>Crowdin</CrowdinLink> platform, and help us become better together with you!"
-        },
-        "AutoSaveItems": {
-            "title": "Autosave",
-            "footer": "When auto-save is enabled, all entered data will be saved to your list in 2 seconds, where you can edit them."
-        }
+    "price": {
+      "title": "Цена",
+      "placeholder": "Введите цену",
+      "required_error": "Вы не ввели цену"
     },
-    "NotFound": {
-        "title": "Page not found",
-        "description": "Sorry, the requested page was not found.",
-        "button": "Go to homepage"
+    "unit": {
+      "title": "Unit",
+      "values": {
+        "kg": "kg",
+        "l": "l",
+        "pc": "pc"
+      },
+      "required_error": "Вы не выбрали меру"
     },
-    "PopupUnauthorizedError": {
-        "title": "Session has expired",
-        "description": "Please close the application and reopen it."
+    "currency": {
+      "title": "Currency",
+      "required_error": "Вы не выбрали валюту"
+    },
+    "delete_message": "Вы уверены что хотите удалить этот продукт?"
+  },
+  "Products": {
+    "header": "Saved Items",
+    "Clear": {
+      "title": "Clear Data",
+      "description": "Are you sure you want to clear the whole story? The process is irreversible!",
+      "button": "Clear"
     }
+  },
+  "Settings": {
+    "Language": {
+      "header": "Language",
+      "footer": "You can help us with the translation! Switch to the <CrowdinLink>Crowdin</CrowdinLink> platform, and help us become better together with you!"
+    }
+  },
+  "NotFound": {
+    "title": "Page not found",
+    "description": "Sorry, the requested page was not found.",
+    "button": "Go to homepage"
+  }
 }
