@@ -34,7 +34,6 @@ yarn-error.log*
 
 # typescript
 *.tsbuildinfo
-vite-env.d.ts
 
 certificates
 .vscode
