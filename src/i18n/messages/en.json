@@ -1,33 +1,33 @@
 {
   "Common": {
-    "error": "Ошибка",
-    "save": "Сохранить",
-    "delete": "Удалить",
-    "deletion": "Удаление"
+    "error": "Error",
+    "save": "Save",
+    "delete": "Delete",
+    "deletion": "Deleting"
   },
   "Currency": {
-    "RUB": "Рубль",
-    "USD": "Доллар"
+    "RUB": "Russian ruble",
+    "USD": "Dollar"
   },
   "Home": {
     "name": {
       "title": "Name",
-      "placeholder": "Введите название"
+      "placeholder": "Enter name"
     },
     "weight": {
       "title": "Weight",
-      "placeholder": "Введите вес",
-      "required_error": "Вы не ввели вес"
+      "placeholder": "Enter weight",
+      "required_error": "You didn't enter the weight"
     },
     "pieces": {
       "title": "Quantity",
-      "placeholder": "Введите количество",
-      "required_error": "Вы не ввели количество"
+      "placeholder": "Enter quantity",
+      "required_error": "You did not enter the quantity"
     },
     "price": {
-      "title": "Цена",
-      "placeholder": "Введите цену",
-      "required_error": "Вы не ввели цену"
+      "title": "Price",
+      "placeholder": "Enter a price",
+      "required_error": "You didn't enter the price"
     },
     "unit": {
       "title": "Unit",
@@ -36,13 +36,13 @@
         "l": "l",
         "pc": "pc"
       },
-      "required_error": "Вы не выбрали меру"
+      "required_error": "You haven't chosen a measure"
     },
     "currency": {
       "title": "Currency",
-      "required_error": "Вы не выбрали валюту"
+      "required_error": "You haven't chosen a currency"
     },
-    "delete_message": "Вы уверены что хотите удалить этот продукт?"
+    "delete_message": "Are you sure you want to delete this product?"
   },
   "Products": {
     "header": "Saved Items",
