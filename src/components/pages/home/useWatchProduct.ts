@@ -17,6 +17,7 @@ const initialCalculated: CalculatedProduct = {
 export function useWatchProduct(): Product {
   const { getValues, control } = useFormContext<Product>()
 
+  const name = useWatch({ control, name: 'name' })
   const unit = useWatch({ control, name: 'unit' })
   const weight = useWatch({ control, name: 'weight' })
   const price = useWatch({ control, name: 'price' })
@@ -31,6 +32,7 @@ export function useWatchProduct(): Product {
 
   return {
     ...values,
+    name,
     ...calculated
   }
 }
