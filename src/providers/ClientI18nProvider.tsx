@@ -8,6 +8,7 @@ import {
   useTransition
 } from 'react'
 import { IntlProvider } from 'use-intl'
+import { Loader } from '@/components/ui/Loader'
 import { defaultTimeZone } from '@/i18n/config'
 import { getLocales } from '@/i18n/get-locales'
 import type { Translation } from '@/i18n/types'
@@ -19,7 +20,7 @@ export const ClientI18nProvider = memo(function ClientI18nProvider({
   const { locale } = useLocale()
 
   const [messages, setMessages] = useState<Translation | null>(null)
-  const [, startTransition] = useTransition()
+  const [isLoading, startTransition] = useTransition()
 
   useLayoutEffect(() => {
     startTransition(async () => {
@@ -27,6 +28,8 @@ export const ClientI18nProvider = memo(function ClientI18nProvider({
       setMessages(messages)
     })
   }, [locale])
+
+  if (isLoading) return <Loader />
 
   return (
     <IntlProvider
