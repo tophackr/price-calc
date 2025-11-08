@@ -1,4 +1,10 @@
+import {
+  reactErrorHandler,
+  replayIntegration,
+  init as sentryInit
+} from '@sentry/react'
 import { retrieveLaunchParams } from '@tma.js/sdk-react'
+import mixpanel from 'mixpanel-browser'
 import 'normalize.css/normalize.css'
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
@@ -8,7 +14,7 @@ import { init } from '@/core/init'
 import '@/core/mocks/mockEnv'
 import '@/styles/globals.css'
 
-/* sentryInit({
+sentryInit({
   dsn: import.meta.env.VITE_SENTRY_DSN,
   enabled: !!import.meta.env.VITE_SENTRY_ENABLED,
   environment: import.meta.env.MODE,
@@ -21,17 +27,15 @@ mixpanel.init(import.meta.env.VITE_MIXPANEL_TOKEN, {
   autocapture: true,
   record_sessions_percent: 100,
   api_host: import.meta.env.VITE_MIXPANEL_HOST
-}) */
+})
 
-const root = createRoot(
-  document.querySelector('#app')! /* {
+const root = createRoot(document.querySelector('#app')!, {
   onUncaughtError: reactErrorHandler((error, errorInfo) => {
     console.warn('Uncaught error', error, errorInfo.componentStack)
   }),
   onCaughtError: reactErrorHandler(),
   onRecoverableError: reactErrorHandler()
-} */
-)
+})
 
 try {
   const launchParams = retrieveLaunchParams()
